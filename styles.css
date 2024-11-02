@@ -1,0 +1,309 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body background and text styling */
+body {
+    background-color: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Container for sections */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Header Section */
+header {
+    background-color: #2d3e50;
+    color: #fff;
+    padding: 1rem 0;
+}
+
+header h1 {
+    display: inline;
+    font-size: 2.5rem;
+}
+
+nav ul {
+    list-style: none;
+    float: right;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+nav ul li a:hover {
+    background-color: #f68b1e;
+    border-radius: 5px;
+}
+
+/* Search Section */
+.search-section {
+    background: #fff;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.search-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #2d3e50;
+}
+
+.search-section form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.search-section input {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-section button {
+    padding: 10px 20px;
+    background-color: #f68b1e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-section button:hover {
+    background-color: #d4771d;
+}
+
+/* Featured Jobs Section */
+.featured-jobs {
+    padding: 2rem 0;
+}
+
+.featured-jobs h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2d3e50;
+}
+
+.job-listings {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-around;
+}
+
+.job-listings article {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    text-align: center;
+}
+
+.job-listings article h3 {
+    color: #f68b1e;
+    margin-bottom: 10px;
+}
+
+.job-listings article a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #2d3e50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.job-listings article a:hover {
+    background-color: #f68b1e;
+}
+
+/* How It Works Section */
+.how-it-works {
+    background-color: #f4f7fa;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.how-it-works h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2d3e50;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-around;
+}
+
+.steps .step {
+    width: 30%;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.steps .step h3 {
+    color: #f68b1e;
+    margin-bottom: 10px;
+}
+
+/* Footer Section */
+footer {
+    background-color: #2d3e50;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+footer nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer nav ul li a:hover {
+    color: #f68b1e;
+}
+
+
+/* sign up section */
+.signup-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f7fa;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label, input, button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #2d3e50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #f68b1e;
+}
+
+/* login.css */
+
+.login-container {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Contact Page Styles */
+
+.contact-container {
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 20px;
+    background-color: #f9f9f9; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.contact-container h2 {
+    text-align: center; 
+    color: #333; 
+}
+
+.contact-container label {
+    margin-top: 10px;
+    display: block; 
+    color: #555; 
+}
+
+.contact-container input,
+.contact-container textarea {
+    width: 100%; 
+    padding: 10px; 
+    margin: 10px 0; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box;
+}
+
+.contact-container button {
+    width: 100%; 
+    padding: 10px;
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+.contact-container button:hover {
+    background-color: #0056b3; 
+}

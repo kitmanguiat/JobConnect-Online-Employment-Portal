@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up | JobConnect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form action="signup.php" method="POST">
+            <label for="name">Full Name:</label>
+            <input type="text" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+
+            <label for="contact">Contact Number:</label>
+            <input type="text" name="contact" required>
+
+            <label for="role">Sign up as:</label>
+    <select name="role" required>
+        <option value="job_seeker">Job-Seeker</option>
+        <option value="employer">Employer</option>
+    </select>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            const password = document.querySelector("input[name='password']").value;
+            if (password.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                event.preventDefault();
+            }
+        });
+        </script>        
+</body>
+</html>
