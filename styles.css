@@ -307,3 +307,90 @@ button:hover {
 .contact-container button:hover {
     background-color: #0056b3; 
 }
+
+/* Job Listings Styles */
+
+.job-listings-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.job-listings-container h2 {
+    text-align: center;
+}
+
+.search-filter {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.search-filter input, .search-filter select {
+    padding: 10px;
+    width: 45%;
+}
+
+.job-listing {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.job-listing h3 {
+    color: #333;
+    margin: 0;
+}
+
+.job-listing p {
+    color: #666;
+}
+
+/* Add Job Form Styles */
+
+.add-job-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-job-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+.add-job-container label {
+    margin-top: 10px;
+    display: block;
+    color: #555;
+}
+
+.add-job-container input,
+.add-job-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.add-job-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-job-container button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Listings | JobConnect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="job-listings-container">
+        <h2>Available Job Vacancies</h2>
+        
+        <!-- Search and Filter Section -->
+        <div class="search-filter">
+            <input type="text" id="search" placeholder="Search jobs by title or company...">
+            <select id="location-filter">
+                <option value="">All Locations</option>
+                <option value="Location1">Location1</option>
+                <option value="Location2">Location2</option>
+                <option value="Location3">Location1</option>
+                <option value="Location4">Location1</option>
+                <option value="Location5">Location1</option>
+                <option value="Location6">Location1</option>
+                <!-- Add other location options -->
+            </select>
+            <button onclick="filterJobs()">Search</button>
+        </div>
+        
+        <!-- Job Listings -->
+        <div id="job-listings"></div>
+    </div>
+    
+    <script> 
+        function fetchJobs() {
+    const search = document.getElementById("search").value;
+    const location = document.getElementById("location-filter").value;
+
+    fetch(`job-listings.php?search=${search}&location=${location}`)
+        .then(response => response.json())
+        .then(data => displayJobs(data));
+}
+
+function displayJobs(jobs) {
+    const jobListings = document.getElementById("job-listings");
+    jobListings.innerHTML = ""; // Clear previous results
+
+    jobs.forEach(job => {
+        const jobDiv = document.createElement("div");
+        jobDiv.classList.add("job-listing");
+
+        jobDiv.innerHTML = `
+            <h3>${job.title}</h3>
+            <p><strong>Company:</strong> ${job.company}</p>
+            <p><strong>Location:</strong> ${job.location}</p>
+            <p>${job.description}</p>
+        `;
+
+        jobListings.appendChild(jobDiv);
+    });
+}
+
+// Fetch all jobs on page load
+document.addEventListener("DOMContentLoaded", fetchJobs);
+
+    </script> 
+</body>
+</html>
