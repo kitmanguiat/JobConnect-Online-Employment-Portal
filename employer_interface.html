@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employer Dashboard | JobConnect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome, [Employer’s Company Name]</h1>
+    </header>
+    
+    <nav class="navbar">
+        <ul>
+            <li><a href="#post-job">Post a Job</a></li>
+            <li><a href="#manage-jobs">Manage Job Listings</a></li>
+            <li><a href="#view-applicants">View Applicants</a></li>
+            <li><a href="#profile">Profile</a></li>
+        </ul>
+    </nav>
+    
+    <section id="post-job">
+        <h2>Post a New Job</h2>
+        <form action="post-job.php" method="POST">
+            <label for="job-title">Job Title:</label>
+            <input type="text" id="job-title" name="job_title" required>
+            
+            <label for="description">Job Description:</label>
+            <textarea id="description" name="description" rows="5" required></textarea>
+            
+            <label for="requirements">Requirements:</label>
+            <textarea id="requirements" name="requirements" rows="4" required></textarea>
+            
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+            
+            <label for="salary">Salary:</label>
+            <input type="number" id="salary" name="salary" required>
+            
+            <button type="submit">Post Job</button>
+        </form>
+    </section>
+    
+    <section id="manage-jobs">
+        <h2>Manage Job Listings</h2>
+        <div class="job-listings">
+            <!-- Job postings will be dynamically loaded here -->
+        </div>
+    </section>
+
+    <section id="view-applicants">
+        <h2>View Applicants</h2>
+        <div class="applicant-list">
+            <!-- Applicant information will be dynamically displayed here -->
+        </div>
+    </section>
+
+    <section id="profile">
+        <h2>Profile</h2>
+        <form action="update-employer-profile.php" method="POST" enctype="multipart/form-data">
+            <label for="company-name">Company Name:</label>
+            <input type="text" id="company-name" name="company_name" required>
+            
+            <label for="logo">Upload/Update Logo:</label>
+            <input type="file" id="logo" name="logo">
+            
+            <label for="company-description">Company Description:</label>
+            <textarea id="company-description" name="company_description" rows="5"></textarea>
+            
+            <button type="submit">Update Profile</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 JobConnect. All Rights Reserved.</p>
+    </footer>
+    
+    <script src="employer.js"> function loadJobListings() {
+        fetch('get-jobs.php?employer_id=123') // Replace with dynamic employer ID
+            .then(response => response.json())
+            .then(data => displayJobs(data));
+    }
+    
+    function displayJobs(jobs) {
+        const container = document.querySelector('.job-listings');
+        container.innerHTML = "";
+        jobs.forEach(job => {
+            const jobItem = document.createElement('div');
+            jobItem.classList.add('job-item');
+            jobItem.innerHTML = `
+                <h3>${job.title}</h3>
+                <p><strong>Location:</strong> ${job.location}</p>
+                <p><strong>Salary:</strong> $${job.salary}</p>
+                <button onclick="deleteJob(${job.id})">Delete Job</button>
+            `;
+            container.appendChild(jobItem);
+        });
+    }
+    
+    function deleteJob(jobId) {
+        fetch(`delete-job.php?job_id=${jobId}`, { method: 'DELETE' })
+            .then(() => loadJobListings());
+    }
+    
+    document.addEventListener('DOMContentLoaded', loadJobListings);
+    </script> 
+</body>
+</html>

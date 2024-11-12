@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Seeker Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">PhilJobNet</div>
+        <ul class="nav-links">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Logout</a></li>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <main class="registration-content">
+            <h1>Encode Your Personal Profile</h1>
+            <form action="submit_registration.php" method="POST">
+                <h2>Applicant Name</h2>
+                <label for="last-name">Last Name <span class="required">*</span></label>
+                <input type="text" id="last-name" name="last_name" required>
+
+                <label for="first-name">First Name <span class="required">*</span></label>
+                <input type="text" id="first-name" name="first_name" required>
+
+                <label for="middle-name">Middle Name <span class="required">*</span></label>
+                <input type="text" id="middle-name" name="middle_name" required placeholder="Put hyphen (-) if not applicable">
+
+                <label for="suffix">Suffix</label>
+                <select id="suffix" name="suffix">
+                    <option value="none">NONE</option>
+                    <option value="jr">Jr.</option>
+                    <option value="sr">Sr.</option>
+                    <option value="iii">III</option>
+                </select>
+
+                <label for="dob">Date of Birth <span class="required">*</span></label>
+                <input type="date" id="dob" name="dob" required>
+
+                <label for="sex">Sex <span class="required">*</span></label>
+                <select id="sex" name="sex" required>
+                    <option value="">SELECT</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="photo">Photo</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+                <p>160 x 160 px</p>
+
+                <button type="submit">Upload Photo</button>
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="button">Next</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
