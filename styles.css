@@ -1,4 +1,4 @@
-/* Reset some default styles */
+/* Main Interface */
 * {
     margin: 0;
     padding: 0;
@@ -16,6 +16,7 @@ body {
 /* Container for sections */
 .container {
     width: 80%;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -45,6 +46,7 @@ nav ul li a {
     color: #fff;
     text-decoration: none;
     padding: 5px 10px;
+    transition: background-color 0.3s;
 }
 
 nav ul li a:hover {
@@ -73,9 +75,15 @@ nav ul li a:hover {
 
 .search-section input {
     padding: 10px;
-    width: 200px;
+    width: 250px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.search-section input:focus {
+    border-color: #f68b1e;
+    outline: none;
 }
 
 .search-section button {
@@ -85,6 +93,7 @@ nav ul li a:hover {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .search-section button:hover {
@@ -107,6 +116,7 @@ nav ul li a:hover {
     display: flex;
     gap: 1.5rem;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .job-listings article {
@@ -115,6 +125,7 @@ nav ul li a:hover {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 30%;
+    min-width: 250px; /* Ensures responsiveness */
     text-align: center;
 }
 
@@ -131,6 +142,7 @@ nav ul li a:hover {
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 .job-listings article a:hover {
@@ -153,14 +165,17 @@ nav ul li a:hover {
 .steps {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .steps .step {
     width: 30%;
+    min-width: 250px; /* Ensures responsiveness */
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0; /* Adds spacing between steps */
 }
 
 .steps .step h3 {
@@ -190,122 +205,233 @@ footer nav ul {
 footer nav ul li a {
     color: #fff;
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 footer nav ul li a:hover {
     color: #f68b1e;
 }
 
+/* Signup css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-/* sign up section */
-.signup-container {
-    width: 50%;
-    margin: 0 auto;
-    padding: 20px;
+/* Body background and text styling */
+body {
     background-color: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Sign Up Container */
+.signup-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 100px auto; /* Center the container */
+    padding: 2rem;
+    background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .signup-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
+    color: #2d3e50;
 }
 
-label, input, button {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #f68b1e;
+    outline: none;
 }
 
 button {
-    background-color: #2d3e50;
-    color: white;
     padding: 10px;
+    background-color: #f68b1e;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #f68b1e;
+    background-color: #d4771d;
 }
 
-/* login.css */
+/* Login css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
+/* Body background and text styling */
+body {
+    background-color: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Login Container */
 .login-container {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
+    width: 90%;
+    max-width: 400px;
+    margin: 100px auto; /* Center the container */
+    padding: 2rem;
+    background-color: #fff;
     border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.login-container h2 {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.login-container input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+.login-container h2 {
+    margin-bottom: 1.5rem;
+    color: #2d3e50;
 }
 
-.login-container button {
-    width: 100%;
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+input[type="email"],
+input[type="password"] {
     padding: 10px;
-    background-color: #007bff;
-    color: white;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #f68b1e;
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    background-color: #f68b1e;
+    color: #fff;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-/* Contact Page Styles */
+button:hover {
+    background-color: #d4771d;
+}
 
+/* Contact css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body background and text styling */
+body {
+    background-color: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Contact Container */
 .contact-container {
-    max-width: 600px; 
-    margin: 0 auto; 
-    padding: 20px;
-    background-color: #f9f9f9; 
-    border: 1px solid #ccc;
-    border-radius: 5px; 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    width: 90%;
+    max-width: 500px;
+    margin: 100px auto; /* Center the container */
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .contact-container h2 {
-    text-align: center; 
-    color: #333; 
+    margin-bottom: 1.5rem;
+    color: #2d3e50;
 }
 
-.contact-container label {
-    margin-top: 10px;
-    display: block; 
-    color: #555; 
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-.contact-container input,
-.contact-container textarea {
-    width: 100%; 
-    padding: 10px; 
-    margin: 10px 0; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    box-sizing: border-box;
+label {
+    margin-bottom: 5px;
+    text-align: left;
 }
 
-.contact-container button {
-    width: 100%; 
+input[type="text"],
+input[type="email"],
+textarea {
     padding: 10px;
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    transition: background-color 0.3s; 
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
 }
 
-.contact-container button:hover {
-    background-color: #0056b3; 
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #f68b1e;
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    background-color: #f68b1e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #d4771d;
 }
 
 /* Job Listings Styles */
@@ -393,4 +519,207 @@ button:hover {
 
 .add-job-container button:hover {
     background-color: #0056b3;
+}
+
+/* JObseeker registration */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Main Content Styles */
+.registration-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #007bff;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.required {
+    color: red;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button[type="button"] {
+    background-color: #ccc;
+}
+
+button[type="button"]:hover {
+    background-color: #aaa;
+}
+
+/* Employer Registration */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Main Content Styles */
+.registration-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #007bff;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button[type="button"] {
+    background-color: #ccc;
+}
+
+button[type="button"]:hover {
+    background-color: #aaa;
 }
