@@ -6,79 +6,35 @@
     <title>Employer Dashboard | JobConnect</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .navbar {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-        }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-        }
-        .container {
-            display: flex;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-        .main-content {
-            flex: 3;
-            padding-right: 20px;
-        }
-        .company-info {
-            flex: 1;
+        /* Existing styles... */
+        /* Add styles for the job posting form */
+        .job-posting-form {
             background: white;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
-        .search-section {
-            display: flex;
-            justify-content: space-between;
+        .job-posting-form h2 {
             margin-bottom: 20px;
         }
-        .search-section input {
-            flex: 1;
+        .job-posting-form input, .job-posting-form textarea, .job-posting-form select {
+            width: 100%;
             padding: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin-right: 10px;
         }
-        .search-button, .post-job {
+        .job-posting-form button {
+            background-color: #007bff;
+            color: white;
             padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
-        .post-job {
-            background-color: #007bff;
-            color: white;
-        }
-        .post-job:hover {
+        .job-posting-form button:hover {
             background-color: #0056b3;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            position: relative;
-            bottom: 0;
-            width: 100%;
         }
     </style>
 </head>
@@ -87,7 +43,7 @@
         <div class="logo">JobConnect</div>
         <ul class="nav-links">
             <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="#">Company Profile</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
     </nav>
@@ -103,7 +59,7 @@
                     <li><a href="employer_post_job.html">Post a Job</a></li>
                     <li><a href="employer_manage_job.html">Manage Job Listings</a></li>
                     <li><a href="#view-applicants">View Applicants</a></li>
-                    <li><a href="#profile">Company Profile</a></li>
+                    <li><a href="#profile">Profile</a></li>
                 </ul>
             </nav>
 
@@ -113,9 +69,22 @@
                 <button class="post-job">Post a Job Vacancy</button>
             </div>
 
-            <section id="job-postings">
-                <h2>Job Postings</h2>
-                <p>You have no job postings.</p>
+            <section id="post-job" class="job-posting-form">
+                <h2>Post a Job</h2>
+                <form action="submit_job.php" method="POST">
+                    <input type="text" name="job_title" placeholder="Job Title" required>
+                    <input type="text" name="job_location" placeholder="Location" required>
+                    <textarea name="job_description" placeholder="Job Description" rows="5" required></textarea>
+                    <select name="job_type" required>
+                        <option value="">Select Job Type</option>
+                        <option value="full_time">Full Time</option>
+                        <option value="part_time">Part Time</option>
+                        <option value="contract">Contract</option>
+                        <option value="internship">Internship</option>
+                    </select>
+                    <input type="number" name="salary" placeholder="Salary" required>
+                    <button type="submit">Post Job</button>
+                </form>
             </section>
         </div>
 
@@ -127,6 +96,8 @@
             <p><strong>Accreditation Status:</strong> <span class="status red">Verify accreditation</span></p>
             <p><a href="#">Manage accreditation</a></p>
             <p><strong>Public Profile Link:</strong> <a href="#">View company profile</a></p>
+            <p><strong>Public Profile QR Code:</strong></p>
+            <img src="qr-code-placeholder.png" alt="QR Code" class="qr-code">
         </aside>
     </div>
 

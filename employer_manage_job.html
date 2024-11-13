@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard | JobConnect</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Existing styles... */
+        /* Add styles for the manage jobs section */
+        .manage-jobs {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .manage-jobs h2 {
+            margin-bottom: 20px;
+        }
+        .job-list {
+            list-style: none;
+            padding: 0;
+        }
+        .job-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .job-item:last-child {
+            border-bottom: none;
+        }
+        .job-actions button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .edit-button {
+            background-color: #ffc107;
+            color: white;
+        }
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+        }
+        .edit-button:hover {
+            background-color: #e0a800;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">JobConnect</div>
+        <ul class="nav-links">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Company Profile</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <header>
+                <h1>Hello, <?php echo htmlspecialchars($companyName); ?></h1>
+            </header>
+
+            <nav class="section-navbar">
+                <ul>
+                    <li><a href="employer_post_job.html">Post a Job</a></li>
+                    <li><a href="employer_manage_job.html">Manage Job Listings</a></li>
+                    <li><a href="#view-applicants">View Applicants</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                </ul>
+            </nav>
+
+            <div class="search-section">
+                <input type="text" placeholder="Search by position title or work location">
+                <button class="search-button">Search</button>
+                <button class="post-job">Post a Job Vacancy</button>
+            </div>
+
+            <section id="manage-jobs" class="manage-jobs">
+                <h2>Manage Your Job Listings</h2>
+                <ul class="job-list">
+                    <!-- Example job listings -->
+                    <li class="job-item">
+                        <span>Software Engineer</span>
+                        <div class="job-actions">
+                            <button class="edit-button" onclick="editJob('Software Engineer')">Edit</button>
+                            <button class="delete-button" onclick="deleteJob('Software Engineer')">Delete</button>
+                        </div>
+                    </li>
+                    <li class="job-item">
+                        <span>Product Manager</span>
+                        <div class="job-actions">
+                            <button class="edit-button" onclick="editJob('Product Manager')">Edit</button>
+                            <button class="delete-button" onclick="deleteJob('Product Manager')">Delete</button>
+                        </div>
+                    </li>
+                    <li class="job-item">
+                        <span>UX Designer</span>
+                        <div class="job-actions">
+                            <button class="edit-button" onclick="editJob('UX Designer')">Edit</button>
+                            <button class="delete-button" onclick="deleteJob('UX Designer')">Delete</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <aside class="company-info">
+            <h3>Company Info</h3>
+            <img src="logo-placeholder.png" alt="Company Logo" class="company-logo">
+            <p><a href="#">Change logo</a></p>
+            <p><strong>Employer Name:</strong> <?php echo htmlspecialchars($employerName); ?></p>
+            <p><strong>Accreditation Status:</strong> <span class="status red">Verify accreditation</span></p>
+            <p><a href="#">Manage accreditation</a></p>
+            <p><strong>Public Profile Link:</strong> <a href="#">View company profile</a></p>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 JobConnect. All Rights Reserved.</p>
+    </footer>
+
+    <script src="employer.js">
+        // JavaScript code for loading job listings and other functionalities
+
+        function editJob(jobTitle) {
+            // Logic to edit the job posting
+            alert('Edit job: ' + jobTitle);
+            // Redirect to edit form or open a modal
+        }
+
+        function deleteJob(jobTitle) {
+            // Logic to delete the job posting
+            if (confirm('Are you sure you want to delete ' + jobTitle + '?')) {
+                alert('Job deleted: ' + jobTitle);
+                // Implement deletion logic here
+            }
+        }
+    </script>
+</body>
+</html>
