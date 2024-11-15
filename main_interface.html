@@ -4,27 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobConnect - Online Employment Portal</title>
-    <link rel="stylesheet" href="styles.css"> <styles.css>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        .highlight, header .current a {
+            color: #e8491d;
+            font-weight: bold;
+        }
+        .search-section {
+            background: #f4f4f4;
+            padding: 30px 0;
+            text-align: center;
+        }
+        .search-section form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .search-section input[type="text"] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid #ccc;
+            width: 30%;
+            margin-right: 10px;
+        }
+        .search-section button {
+            padding: 10px 20px;
+            background: #e8491d;
+            color: white;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+        .featured-jobs {
+            padding: 30px 0;
+        }
+        .job-listings {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .job-listings article {
+            flex-basis: 30%;
+            background: #f4f4f4;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .job-listings a {
+            display: inline-block;
+            background: #35424a;
+            color: #ffffff;
+            padding: 10px 20px;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        .how-it-works {
+            background: #35424a;
+            color: #ffffff;
+            padding: 30px 0;
+        }
+        .steps {
+            display: flex;
+            justify-content: space-between;
+        }
+        .step {
+            flex-basis: 30%;
+            text-align: center;
+        }
+        footer {
+            background: #35424a;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        @media(max-width: 768px) {
+            header #branding,
+            header nav,
+            header nav li,
+            .search-section form,
+            .job-listings article,
+            .steps {
+                float: none;
+                text-align: center;
+                width: 100%;
+            }
+            .search-section input[type="text"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .job-listings,
+            .steps {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header Section -->
     <header>
         <div class="container">
-            <h1>JobConnect</h1>
+            <div id="branding">
+                <h1><span class="highlight">Job</span>Connect</h1>
+            </div>
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="joblisting.html">Job Listings</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li> 
-                    <li><a href="login.html">Login</a></li> 
-                    <li><a href="signup.html">Register</a></li> 
+                    <li><a href="main_home.html">Home</a></li>
+                    <li><a href="main_joblisting.html">Job Listings</a></li>
+                    <li><a href="main_aboutus.html">About Us</a></li>
+                    <li><a href="main_contact.html">Contact</a></li>
+                    <li><a href="main_login.html">Login</a></li>
+                    <li><a href="main_signup.html">Register</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Search Section -->
     <section class="search-section">
         <div class="container">
             <h2>Find Your Dream Job</h2>
@@ -36,7 +176,6 @@
         </div>
     </section>
 
-    <!-- Featured Jobs Section -->
     <section class="featured-jobs">
         <div class="container">
             <h2>Featured Jobs</h2>
@@ -53,12 +192,16 @@
                     <p>Company: ABC Design</p>
                     <a href="#">View Job</a>
                 </article>
-                <!-- Add more job listings here -->
+                <article>
+                    <h3>Marketing Specialist</h3>
+                    <p>Location: Taguig City</p>
+                    <p>Company: 123 Marketing</p>
+                    <a href="#">View Job</a>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
     <section class="how-it-works">
         <div class="container">
             <h2>How It Works</h2>
@@ -79,15 +222,11 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
     <footer>
         <div class="container">
             <p>&copy; 2024 JobConnect. All rights reserved.</p>
             <nav>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
+                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
             </nav>
         </div>
     </footer>

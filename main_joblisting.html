@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings | JobConnect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        .highlight {
+            color: #e8491d;
+            font-weight: bold;
+        }
+        .job-listings-container {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .search-filter {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .search-filter input, .search-filter select {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-filter button {
+            padding: 10px 20px;
+            background: #e8491d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .job-listing {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .job-listing h3 {
+            margin-top: 0;
+            color: #35424a;
+        }
+        @media(max-width: 768px) {
+            .search-filter {
+                flex-direction: column;
+            }
+            .search-filter input, .search-filter select, .search-filter button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Job</span>Connect</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="main_home.html">Home</a></li>
+                    <li class="current"><a href="main_joblisting.html">Job Listings</a></li>
+                    <li><a href="main_aboutus.html">About Us</a></li>
+                    <li><a href="main_contact.html">Contact</a></li>
+                    <li><a href="main_login.html">Login</a></li>
+                    <li><a href="main_signup.html">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="job-listings-container">
+            <h2>Available Job Vacancies</h2>
+            
+            <!-- Search and Filter Section -->
+            <div class="search-filter">
+                <input type="text" id="search" placeholder="Search jobs by title or company...">
+                <select id="location-filter">
+                    <option value="">All Locations</option>
+                    <option value="Makati">Makati</option>
+                    <option value="Quezon City">Quezon City</option>
+                    <option value="Taguig">Taguig</option>
+                    <option value="Pasig">Pasig</option>
+                    <option value="Mandaluyong">Mandaluyong</option>
+                    <option value="Manila">Manila</option>
+                </select>
+                <button onclick="filterJobs()">Search</button>
+            </div>
+            
+            <!-- Job Listings -->
+            <div id="job-listings">
+                <!-- Sample job listings (will be replaced by dynamic content) -->
+                <div class="job-listing">
+                    <h3>Software Developer</h3>
+                    <p><strong>Company:</strong> Tech Innovators Inc.</p>
+                    <p><strong>Location:</strong> Makati</p>
+                    <p>We are seeking a talented Software Developer to join our dynamic team. The ideal candidate should have experience in full-stack development and be passionate about creating innovative solutions.</p>
+                </div>
+                <div class="job-listing">
+                    <h3>Marketing Specialist</h3>
+                    <p><strong>Company:</strong> Global Brands Co.</p>
+                    <p><strong>Location:</strong> Taguig</p>
+                    <p>Join our marketing team to develop and implement effective marketing strategies. The successful candidate will have a strong background in digital marketing and brand management.</p>
+                </div>
+                <div class="job-listing">
+                    <h3>Customer Service Representative</h3>
+                    <p><strong>Company:</strong> ServicePro Solutions</p>
+                    <p><strong>Location:</strong> Quezon City</p>
+                    <p>We are looking for enthusiastic individuals to join our customer service team. The ideal candidate will have excellent communication skills and a passion for helping customers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function filterJobs() {
+            const search = document.getElementById("search").value.toLowerCase();
+            const location = document.getElementById("location-filter").value.toLowerCase();
+            const jobListings = document.querySelectorAll(".job-listing");
+
+            jobListings.forEach(job => {
+                const title = job.querySelector("h3").textContent.toLowerCase();
+                const company = job.querySelector("p:nth-child(2)").textContent.toLowerCase();
+                const jobLocation = job.querySelector("p:nth-child(3)").textContent.toLowerCase();
+
+                if ((title.includes(search) || company.includes(search)) && 
+                    (location === "" || jobLocation.includes(location))) {
+                    job.style.display = "block";
+                } else {
+                    job.style.display = "none";
+                }
+            });
+        }
+
+        // Add event listeners for real-time filtering
+        document.getElementById("search").addEventListener("input", filterJobs);
+        document.getElementById("location-filter").addEventListener("change", filterJobs);
+
+        // Initial filter on page load
+        document.addEventListener("DOMContentLoaded", filterJobs);
+    </script>
+</body>
+</html>
