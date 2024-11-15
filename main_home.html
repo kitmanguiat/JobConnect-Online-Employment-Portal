@@ -60,31 +60,31 @@
             font-weight: 500;
         }
 
-        .auth-buttons {
+        .search-form {
             display: flex;
+            justify-content: center;
             gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .btn {
-            padding: 0.5rem 1.5rem;
+        .search-form input {
+            padding: 0.5rem;
+            border: none;
             border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
         }
 
-        .btn-primary {
+        .search-form button {
+            padding: 0.5rem 2rem;
             background: #e8491d;
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #ffffff;
-            color: #35424a;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .hero {
             background: url('/placeholder.svg?height=400&width=1200') no-repeat center center/cover;
-            color: #ffffff;
+            color: #121111;
             padding: 4rem 0;
             text-align: center;
         }
@@ -98,28 +98,6 @@
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 2rem;
-        }
-
-        .search-form {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .search-form input, .search-form select {
-            padding: 0.5rem;
-            border: none;
-            border-radius: 4px;
-        }
-
-        .search-form button {
-            padding: 0.5rem 2rem;
-            background: #e8491d;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
         }
 
         .features, .job-categories, .stats {
@@ -161,37 +139,38 @@
             font-weight: bold;
             color: #e8491d;
         }
-
+        footer {
+            background: #35424a;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
         @media (max-width: 768px) {
             .search-form {
                 flex-direction: column;
-            }
-            
-            nav ul {
-                display: none;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <h1>Job<span>Connect</span></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">Jobs</a></li>
-                    <li><a href="#">Job Fairs</a></li>
-                    <li><a href="#">Trainings</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="auth-buttons">
-                <a href="#" class="btn btn-secondary">Sign Up</a>
-                <a href="#" class="btn btn-primary">Login</a>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><span>Job</span>Connect</div>
+                <nav>
+                    <ul>
+                        <li><a href="main_home.html">Home</a></li>
+                        <li><a href="main_joblisting.html">Job Listings</a></li>
+                        <li><a href="main_aboutus.html">About Us</a></li>
+                        <li><a href="main_contact.html">Contact</a></li>
+                        <li><a href="main_login.html">Login</a></li>
+                        <li><a href="main_signup.html">Register</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </header>
@@ -201,11 +180,6 @@
             <div class="container">
                 <h1>Find Your Dream Job with JobConnect</h1>
                 <p>JobConnect is an automated job and applicant matching system designed to streamline your job search and help employers find the right talent.</p>
-                <form class="search-form">
-                    <input type="text" placeholder="Job title or keyword">
-                    <input type="text" placeholder="Location">
-                    <button type="submit">Search Jobs</button>
-                </form>
             </div>
         </section>
 

@@ -3,74 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Listings | JobConnect</title>
+    <title>JobConnect - Your Gateway to Career Opportunities</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
             background-color: #f4f4f4;
         }
+
         .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
+
         header {
             background: #35424a;
             color: #ffffff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #e8491d 3px solid;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        header a {
-            color: #ffffff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
-        header li {
-            display: inline;
-            padding: 0 20px 0 20px;
-        }
-        header #branding {
-            float: left;
-        }
-        header #branding h1 {
-            margin: 0;
-        }
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-        .highlight {
-            color: #e8491d;
-            font-weight: bold;
-        }
-        .job-listings-container {
-            background: #fff;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .search-filter {
+
+        .header-content {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
+            align-items: center;
         }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #e8491d;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .hero {
+            background: url('your-image-path.jpg') no-repeat center center/cover;
+            color: #110f0f;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .search-filter {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
         .search-filter input, .search-filter select {
             padding: 10px;
             margin-right: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
         .search-filter button {
             padding: 10px 20px;
             background: #e8491d;
@@ -79,6 +100,15 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+        .job-listings-container {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
         .job-listing {
             background: #f9f9f9;
             border: 1px solid #ddd;
@@ -86,17 +116,50 @@
             margin-bottom: 15px;
             border-radius: 4px;
         }
+
         .job-listing h3 {
             margin-top: 0;
             color: #35424a;
         }
+
+        #loading {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        footer {
+            background: #35424a;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
         @media(max-width: 768px) {
-            .search-filter {
-                flex-direction: column;
+            header #branding,
+            header nav,
+            header nav li,
+            .search-section form,
+            .job-listings article,
+            .steps {
+                float: none;
+                text-align: center;
+                width: 100%;
             }
-            .search-filter input, .search-filter select, .search-filter button {
+
+            .search-section input[type="text"] {
                 width: 100%;
                 margin-bottom: 10px;
+            }
+
+            .job-listings,
+            .steps {
+                flex-direction: column;
             }
         }
     </style>
@@ -104,92 +167,105 @@
 <body>
     <header>
         <div class="container">
-            <div id="branding">
-                <h1><span class="highlight">Job</span>Connect</h1>
+            <div class="header-content">
+                <div class="logo"><span>Job</span>Connect</div>
+                <nav>
+                    <ul>
+                        <li><a href="main_home.html">Home</a></li>
+                        <li class="current"><a href="main_joblisting.html">Job Listings</a></li>
+                        <li><a href="main_aboutus.html">About Us</a></li>
+                        <li><a href="main_contact.html">Contact</a></li>
+                        <li><a href="main_login.html">Login</a></li>
+                        <li><a href="main_signup.html">Register</a></li>
+                    </ul>
+                </nav>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="main_home.html">Home</a></li>
-                    <li class="current"><a href="main_joblisting.html">Job Listings</a></li>
-                    <li><a href="main_aboutus.html">About Us</a></li>
-                    <li><a href="main_contact.html">Contact</a></li>
-                    <li><a href="main_login.html">Login</a></li>
-                    <li><a href="main_signup.html">Register</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
-    <div class="container">
-        <div class="job-listings-container">
-            <h2>Available Job Vacancies</h2>
-            
-            <!-- Search and Filter Section -->
-            <div class="search-filter">
-                <input type="text" id="search" placeholder="Search jobs by title or company...">
-                <select id="location-filter">
-                    <option value="">All Locations</option>
-                    <option value="Makati">Makati</option>
-                    <option value="Quezon City">Quezon City</option>
-                    <option value="Taguig">Taguig</option>
-                    <option value="Pasig">Pasig</option>
-                    <option value="Mandaluyong">Mandaluyong</option>
-                    <option value="Manila">Manila</option>
-                </select>
-                <button onclick="filterJobs()">Search</button>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Find Your Dream Job with JobConnect</h1>
+                <p>JobConnect is an automated job and applicant matching system designed to streamline your job search and help employers find the right talent.</p>
             </div>
-            
-            <!-- Job Listings -->
-            <div id="job-listings">
-                <!-- Sample job listings (will be replaced by dynamic content) -->
-                <div class="job-listing">
-                    <h3>Software Developer</h3>
-                    <p><strong>Company:</strong> Tech Innovators Inc.</p>
-                    <p><strong>Location:</strong> Makati</p>
-                    <p>We are seeking a talented Software Developer to join our dynamic team. The ideal candidate should have experience in full-stack development and be passionate about creating innovative solutions.</p>
+        </section>
+
+        <div class="container">
+            <div class="job-listings-container">
+                <h2>Available Job Vacancies</h2>
+                
+                <!-- Loading Indicator -->
+                <div id="loading">Loading jobs...</div>
+                
+                <!-- Search and Filter Section -->
+                <div class="search-filter">
+                    <input type="text" id="search" placeholder="Search jobs by title or company...">
+                    <select id="location-filter">
+                        <option value="">All Locations</option>
+                        <option value="Makati">Makati</option>
+                        <option value="Quezon City">Quezon City</option>
+                        <option value="Taguig">Taguig</option>
+                        <option value="Pasig">Pasig</option>
+                        <option value="Mandaluyong">Mandaluyong</option>
+                        <option value="Manila">Manila</option>
+                    </select>
+                    <button onclick="fetchJobs()">Search</button>
                 </div>
-                <div class="job-listing">
-                    <h3>Marketing Specialist</h3>
-                    <p><strong>Company:</strong> Global Brands Co.</p>
-                    <p><strong>Location:</strong> Taguig</p>
-                    <p>Join our marketing team to develop and implement effective marketing strategies. The successful candidate will have a strong background in digital marketing and brand management.</p>
-                </div>
-                <div class="job-listing">
-                    <h3>Customer Service Representative</h3>
-                    <p><strong>Company:</strong> ServicePro Solutions</p>
-                    <p><strong>Location:</strong> Quezon City</p>
-                    <p>We are looking for enthusiastic individuals to join our customer service team. The ideal candidate will have excellent communication skills and a passion for helping customers.</p>
-                </div>
+                
+                <!-- Job Listings -->
+                <div id="job-listings"></div>
             </div>
         </div>
-    </div>
-    
+    </main>
+
     <script>
-        function filterJobs() {
-            const search = document.getElementById("search").value.toLowerCase();
-            const location = document.getElementById("location-filter").value.toLowerCase();
-            const jobListings = document.querySelectorAll(".job-listing");
+        function fetchJobs() {
+            document.getElementById("loading").style.display = "block"; // Show loading message
 
-            jobListings.forEach(job => {
-                const title = job.querySelector("h3").textContent.toLowerCase();
-                const company = job.querySelector("p:nth-child(2)").textContent.toLowerCase();
-                const jobLocation = job.querySelector("p:nth-child(3)").textContent.toLowerCase();
+            const search = document.getElementById("search").value;
+            const location = document.getElementById("location-filter").value;
 
-                if ((title.includes(search) || company.includes(search)) && 
-                    (location === "" || jobLocation.includes(location))) {
-                    job.style.display = "block";
-                } else {
-                    job.style.display = "none";
-                }
+            fetch(`job-listings.php?search=${search}&location=${location}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("loading").style.display = "none"; // Hide loading message
+                    displayJobs(data);
+                });
+        }
+
+        function displayJobs(jobs) {
+            const jobListings = document.getElementById("job-listings");
+            jobListings.innerHTML = ""; // Clear previous results
+
+            if (jobs.length === 0) {
+                jobListings.innerHTML = "<p>No job listings found.</p>";
+                return;
+            }
+
+            jobs.forEach(job => {
+                const jobDiv = document.createElement("div");
+                jobDiv.classList.add("job-listing");
+
+                jobDiv.innerHTML = `
+                    <h3>${job.title}</h3>
+                    <p><strong>Company:</strong> ${job.company}</p>
+                    <p><strong>Location:</strong> ${job.location}</p>
+                    <p>${job.description}</p>
+                `;
+
+                jobListings.appendChild(jobDiv);
             });
         }
 
-        // Add event listeners for real-time filtering
-        document.getElementById("search").addEventListener("input", filterJobs);
-        document.getElementById("location-filter").addEventListener("change", filterJobs);
-
-        // Initial filter on page load
-        document.addEventListener("DOMContentLoaded", filterJobs);
+        // Fetch all jobs on page load
+        document.addEventListener("DOMContentLoaded", fetchJobs);
     </script>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 JobConnect. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
