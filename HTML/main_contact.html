@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | JobConnect</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, #35424a, #2c3e50);
+            color: #ffffff;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #e8491d;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #e8491d;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .contact-container {
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #35424a;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .contact-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-container label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .contact-container input,
+        .contact-container textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1.2rem;
+            border-radius: 5px;
+            border: 1px solid #cbd5e0;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-container input:focus,
+        .contact-container textarea:focus {
+            outline: none;
+            border-color: #e8491d;
+            box-shadow: 0 0 0 3px rgba(232, 73, 29, 0.1);
+        }
+
+        .contact-container button {
+            padding: 0.8rem;
+            background-color: #e8491d;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        .contact-container button:hover {
+            background-color: #cf3e1a;
+        }
+
+        .contact-container button:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            background: #35424a;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-container {
+                padding: 2rem;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><span>Job</span>Connect</div>
+                <nav>
+                    <ul>
+                        <li><a href="main_home.html">Home</a></li>
+                        <li><a href="main_joblisting.html">Job Listings</a></li>
+                        <li><a href="main_aboutus.html">About Us</a></li>
+                        <li><a href="main_contact.html">Contact</a></li>
+                        <li><a href="main_login.html">Login</a></li>
+                        <li><a href="main_signup.html">Register</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="contact-container">
+            <h2>Contact Us</h2>
+            <form action="contact.php" method="POST">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 JobConnect. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
