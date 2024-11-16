@@ -2,21 +2,110 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | JobConnect</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #35424a;
+        }
+
+        .login-container label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #e8491d;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #cf3e1a;
+        }
+
+        .login-container p {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .login-container p a {
+            text-decoration: none;
+            color: #e8491d;
+        }
+
+        .login-container p a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem;
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Login to JobConnect</h2>
-        <form action="login.php" method="POST">
+        <form action="main_loginDB.php" method="POST" id="loginForm">
             <label for="email">Email:</label>
-            <input type="email" name="email" required>
+            <input type="email" name="email" id="email" placeholder="example@domain.com" required>
 
             <label for="password">Password:</label>
-            <input type="password" name="password" required>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required>
 
             <button type="submit">Login</button>
         </form>
+
+        <p>Don't have an account? <a href="main_signup.html">Sign Up</a></p>
     </div>
+<script src="main_login.html"></script>
 </body>
 </html>
