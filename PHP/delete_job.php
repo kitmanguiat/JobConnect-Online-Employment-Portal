@@ -1,5 +1,5 @@
 <?php
-require_once "../PHP/main_DB.php";
+require_once "../PHP/dbjobconnect.php";
 require_once "../PHP/employer_manage_job.php";
 $jobManager = new JobManager('localhost', 'dbjobconnect', 'root', '');
 

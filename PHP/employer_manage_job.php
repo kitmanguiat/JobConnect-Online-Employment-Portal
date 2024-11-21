@@ -1,5 +1,5 @@
 <?php
-require_once "../PHP/main_DB.php";
+require_once "../PHP/dbjobconnect.php";
 
 class JobManager {
     private $pdo;

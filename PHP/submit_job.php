@@ -1,5 +1,5 @@
 <?php
-require_once "../PHP/main_DB.php";
+require_once "../PHP/dbjobconnect.php";
 
 class JobPosting {
     private $pdo;
@@ -35,13 +35,17 @@ class JobPosting {
                 error_log("Error posting job: " . $e->getMessage());
                 echo "An error occurred while posting the job. Please try again later. Error: " . $e->getMessage();
             }
-            
-            
         } else {
             echo "All fields are required, and the salary must be greater than zero!";
         }
     }
 }
+
+// Database connection variables
+$servername = "localhost";  // Your database server
+$dbname = "dbjobconnect";   // Your database name
+$username = "root";         // Your database username
+$password = "";             // Your database password (use a correct one)
 
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
