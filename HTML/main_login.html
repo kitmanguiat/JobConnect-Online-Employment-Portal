@@ -28,17 +28,16 @@
 
     <main>
         <div class="login-container">
-            <h2>Login to JobConnect</h2>
-            <form action="../PHP/main_loginDB.php" method="POST" id="loginForm">
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email" placeholder="example@domain.com" required>
+            <h2>Login</h2>
+    <form action="../PHP/LoginController.php" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password" placeholder="Enter your password" required>
-
-                <button type="submit">Login</button>
-            </form>
-
+        <button type="submit" name="login">Login</button>
+    </form>
             <p>Don't have an account? <a href="../HTML/main_signup.html">Sign Up</a></p>
         </div>
     </main>
