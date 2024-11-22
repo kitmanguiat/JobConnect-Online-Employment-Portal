@@ -3,63 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Seeker Registration</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Job-Seeker Registration</title>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">PhilJobNet</div>
-        <ul class="nav-links">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Logout</a></li>
-                </div>
-            </li>
-        </ul>
-    </nav>
+    <h1>Job-Seeker Registration</h1>
+    <form action="../PHP/JobSeekerController.php" method="POST" enctype="multipart/form-data">
+        <label for="resume">Resume (Text):</label><br>
+        <textarea name="resume" rows="5" required></textarea><br>
 
-    <div class="container">
-        <main class="registration-content">
-            <h1>Encode Your Personal Profile</h1>
-            <form action="submit_registration.php" method="POST">
-                <h2>Applicant Name</h2>
-                <label for="last-name">Last Name <span class="required">*</span></label>
-                <input type="text" id="last-name" name="last_name" required>
+        <label for="skills">Skills (comma-separated):</label><br>
+        <input type="text" name="skills" required><br>
 
-                <label for="first-name">First Name <span class="required">*</span></label>
-                <input type="text" id="first-name" name="first_name" required>
+        <label for="experience">Experience:</label><br>
+        <textarea name="experience" rows="5" required></textarea><br>
 
-                <label for="middle-name">Middle Name <span class="required">*</span></label>
-                <input type="text" id="middle-name" name="middle_name" required placeholder="Put hyphen (-) if not applicable">
+        <label for="location">Location:</label><br>
+        <input type="text" name="location" required><br>
 
-                <label for="suffix">Suffix</label>
-                <select id="suffix" name="suffix">
-                    <option value="none">NONE</option>
-                    <option value="jr">Jr.</option>
-                    <option value="sr">Sr.</option>
-                    <option value="iii">III</option>
-                </select>
+        <label for="phone_number">Phone Number:</label><br>
+        <input type="text" name="phone_number" required><br>
 
-                <label for="dob">Date of Birth <span class="required">*</span></label>
-                <input type="date" id="dob" name="dob" required>
+        <label for="profile_picture">Profile Picture:</label><br>
+        <input type="file" name="profile_picture" accept="image/*"><br><br>
 
-                <label for="sex">Sex <span class="required">*</span></label>
-                <select id="sex" name="sex" required>
-                    <option value="">SELECT</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-
-                <label for="photo">Photo</label>
-                <input type="file" id="photo" name="photo" accept="image/*">
-                <p>160 x 160 px</p>
-
-                <button type="submit">Upload Photo</button>
-                <button type="button" onclick="window.history.back();">Back</button>
-                <button type="button">Next</button>
-            </form>
-        </main>
-    </div>
+        <button type="submit" name="register_jobseeker">Register</button>
+    </form>
 </body>
 </html>

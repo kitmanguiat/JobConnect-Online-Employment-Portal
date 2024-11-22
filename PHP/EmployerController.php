@@ -64,10 +64,54 @@ $stmt->bindParam(':contact_number', $contact_number);
 
 // Execute the query
 if ($stmt->execute()) {
-    echo "Employer registration successful!";
-    header("Location: ../HTML/employer_dashboard.html");  // Redirect to the dashboard after successful registration
-    exit;
+    echo "
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>SweetAlert</title>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        </head>
+        <body>
+        <script>
+        Swal.fire({
+            title: 'Success!',
+            text: 'Successfully Registered',
+            icon: 'success',
+            confirmButtonText: 'Okay'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '../HTML/employer_dashboard.html';
+            }
+        });
+        </script>
+        </body>
+        </html>";
 } else {
-    echo "An error occurred during employer registration.";
+    echo "
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>SweetAlert</title>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        </head>
+        <body>
+        <script>
+        Swal.fire({
+            title: 'Error!',
+            text: 'Incorrect password or email. Try again!',
+            icon: 'error',
+            confirmButtonText: 'Okay'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '../HTML/employer_registration.html';
+            }
+        });
+        </script>
+        </body>
+        </html>";
 }
 ?>
