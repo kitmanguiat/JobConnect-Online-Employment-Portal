@@ -1,16 +1,15 @@
 <?php
-
+session_start(); 
 require_once '../PHP/Database.php';
 require_once '../PHP/Employer.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}  // Ensure session is started
+// Debugging line to check session data
+var_dump($_SESSION);  // This will output all session variables. Look for 'user_id'
 
-// Check if user is logged in
+// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     echo "Error: User is not logged in.";
-    exit;
+    exit;  // Exit if the user is not logged in
 }
 
 $user_id = $_SESSION['user_id']; // Get the user ID from the session
@@ -28,16 +27,21 @@ $contact_number = trim($_POST['contact_number']);
 $logo = null;
 $upload_dir = "../uploads/logos/";
 
+// Check if a logo is uploaded
 if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
     $logo = $upload_dir . basename($_FILES['logo']['name']);
+    
+    // Attempt to move the uploaded logo file
     if (!move_uploaded_file($_FILES['logo']['tmp_name'], $logo)) {
         echo "Failed to upload logo.";
-        exit;
+        exit;  // Exit if logo upload fails
     }
+} else {
+    echo "No logo uploaded or an error occurred with the logo upload.";
+    exit;  // Exit if no logo was uploaded
 }
 
 // Create a database connection
-require_once '../PHP/Database.php';
 $database = new Database();
 $db = $database->getConnection();
 
@@ -47,7 +51,7 @@ $query = "INSERT INTO employers (user_id, company_name, industry, company_descri
 
 $stmt = $db->prepare($query);
 
-// Bind parameters
+// Bind parameters to the query
 $stmt->bindParam(':user_id', $user_id);
 $stmt->bindParam(':company_name', $company_name);
 $stmt->bindParam(':industry', $industry);
@@ -61,7 +65,7 @@ $stmt->bindParam(':contact_number', $contact_number);
 // Execute the query
 if ($stmt->execute()) {
     echo "Employer registration successful!";
-    header("Location: ../HTML/employer_dashboard.html");  // Redirect to the dashboard
+    header("Location: ../HTML/employer_dashboard.html");  // Redirect to the dashboard after successful registration
     exit;
 } else {
     echo "An error occurred during employer registration.";

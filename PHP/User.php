@@ -74,12 +74,26 @@ class Login {
 
                 // Verify the password
                 if (password_verify($password, $user['password'])) {
+                    // Start the session and set session variables
+                    session_start();
+
+                    // Store the user information in session variables
+                    $_SESSION['user_id'] = $user['id'];  // Set the user ID in session
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['role'] = $user['role'];
+                    $_SESSION['created'] = $user['created_at'];  // Store the account creation time
+
+                    // Debugging: Check session data
+                    var_dump($_SESSION);  // Inspect session variables (make sure 'user_id' is set)
+
                     return $user; // Return user data on successful login
                 } else {
-                    return false; // Password mismatch
+                    // Password mismatch
+                    return false;
                 }
             } else {
-                return false; // No user found with the given email
+                // No user found with the given email
+                return false;
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -87,5 +101,6 @@ class Login {
         }
     }
 }
+
 
 ?>

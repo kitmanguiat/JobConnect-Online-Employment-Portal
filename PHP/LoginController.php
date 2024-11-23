@@ -1,9 +1,12 @@
 <?php
 require_once '../PHP/Database.php';
 require_once '../PHP/User.php';
+session_start();  // Start the session
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+// Check if the user is already logged in (session check)
+if (isset($_SESSION['user_id'])) {
+    header("Location: ../HTML/employer_registration.html");  // Redirect to dashboard if already logged in
+    exit;
 }
 
 // Check if the form is submitted
@@ -35,10 +38,23 @@ if (isset($_POST['login'])) {
         // Check the role and redirect accordingly
         if ($loggedInUser['role'] === 'job-seeker') {
             header("Location: ../HTML/jobseeker_dashboard.html");
+            exit;
         } elseif ($loggedInUser['role'] === 'employer') {
-            header("Location: ../HTML/employer_registration.html");
+            // Check if employer profile exists
+            $stmt = $db->prepare("SELECT * FROM employers WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $_SESSION['user_id']);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                // Redirect to employer dashboard if profile is complete
+                header("Location: ../HTML/employer_dashboard.html");
+                exit;
+            } else {
+                // Redirect to employer registration if profile is not complete
+                header("Location: ../HTML/employer_registration.html");
+                exit;
+            }
         }
-        exit;
     } else {
         echo "Invalid email or password.";
     }
