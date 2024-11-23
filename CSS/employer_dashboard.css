@@ -1,0 +1,132 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav.section-navbar {
+    margin-top: 20px;
+    text-align: center;
+}
+
+nav.section-navbar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav.section-navbar ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav.section-navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #0056b3;
+}
+
+nav.section-navbar ul li a:hover {
+    background-color: #004080;
+}
+
+nav.section-navbar ul li a:active {
+    background-color: #003366;
+}
+
+/* Main Section */
+main {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Profile Section */
+.profile {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.profile h2 {
+    color: #007BFF;
+    margin-top: 0;
+}
+
+.profile p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Jobs Section */
+.jobs {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.jobs h2 {
+    color: #007BFF;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+table td a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #007BFF;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: 30px;
+}

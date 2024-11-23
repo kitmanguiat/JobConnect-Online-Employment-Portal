@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once '../PHP/Database.php';
-require_once '../PHP/User.php';
-session_start();  // Start the session
+require_once '../PHP/User.php'; 
 
 // Check if the user is already logged in (session check)
 if (isset($_SESSION['user_id'])) {
@@ -31,13 +31,13 @@ if (isset($_POST['login'])) {
 
     if ($loggedInUser) {
         // Set session variables
-        $_SESSION['user_id'] = $loggedInUser['id'];  // Ensure the 'id' is being returned
+        $_SESSION['user_id'] = $loggedInUser['user_id'];  // Ensure the 'id' is being returned
         $_SESSION['username'] = $loggedInUser['username'];
         $_SESSION['role'] = $loggedInUser['role'];
 
         // Check the role and redirect accordingly
         if ($loggedInUser['role'] === 'job-seeker') {
-            header("Location: ../HTML/jobseeker_dashboard.html");
+            header("Location: ../HTML/jobseeker_registration.html");
             exit;
         } elseif ($loggedInUser['role'] === 'employer') {
             // Check if employer profile exists
@@ -47,7 +47,7 @@ if (isset($_POST['login'])) {
 
             if ($stmt->rowCount() > 0) {
                 // Redirect to employer dashboard if profile is complete
-                header("Location: ../HTML/employer_dashboard.html");
+                header("Location: ../PHP/employer_dashboard.php");
                 exit;
             } else {
                 // Redirect to employer registration if profile is not complete
