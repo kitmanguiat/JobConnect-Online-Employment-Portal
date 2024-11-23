@@ -3,9 +3,9 @@
 class Database {
 
     private $host = "localhost";
-    private $db_name = "dbjobconnect";  // Change this to your database name
-    private $username = "root";          // Change this to your database username
-    private $password = "";             // Change this to your database password
+    private $db_name = "jobconnect";  // Change this to your database name
+    private $username = "root";       // Change this to your database username
+    private $password = "";           // Change this to your database password
     public $conn;
 
     // Method to establish and return a database connection
