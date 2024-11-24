@@ -9,7 +9,7 @@ class Database {
     public $conn;
 
     // Method to establish and return a database connection
-    public function getConnection() {
+    public function getConnect() {
         $this->conn = null;
 
         try {

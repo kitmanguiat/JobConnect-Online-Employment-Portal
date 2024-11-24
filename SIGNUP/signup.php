@@ -15,12 +15,12 @@
                 <div class="logo"><span>Job</span>Connect</div>
                 <nav>
                     <ul>
-                        <li><a href="../HTML/main_home.html">Home</a></li>
-                        <li><a href="../HTML/main_joblisting.html">Job Listings</a></li>
-                        <li><a href="../HTML/main_aboutus.html">About Us</a></li>
-                        <li><a href="../HTML/main_contact.html">Contact</a></li>
-                        <li><a href="../HTML/main_login.html">Login</a></li>
-                        <li class="current"><a href="../HTML/main_signup.html">Register</a></li>
+                        <li><a href="../MAIN/index.php">Home</a></li>
+                        <li><a href="../MAIN/main_joblisting.php">Job Listings</a></li>
+                        <li><a href="../MAIN/main_aboutus.php">About Us</a></li>
+                        <li><a href="../MAIN/main_contact.php">Contact</a></li>
+                        <li><a href="../LOGIN/login.php">Login</a></li>
+                        <li class="current"><a href="../SIGNUP/signup.php">Register</a></li>
                     </ul>
                 </nav>
             </div>
@@ -30,7 +30,7 @@
     <main>
         <section class="signup-container">
             <h2>Create an Account</h2>
-            <form action="../PHP/AuthController.php" method="POST">
+            <form action="../SIGNUP/signup_process.php" method="POST">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
                 
