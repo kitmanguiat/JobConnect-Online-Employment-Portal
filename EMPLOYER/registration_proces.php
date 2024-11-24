@@ -1,7 +1,7 @@
 <?php
 session_start(); 
-require_once '../PHP/Database.php';
-require_once '../PHP/Employer.php';
+require_once '../DATABASE/dbConnection.php';
+require_once '../EMPLOYER/employerCrud.php';
 
 // Debugging line to check session data
 var_dump($_SESSION);  // This will output all session variables. Look for 'user_id'
@@ -43,7 +43,7 @@ if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
 
 // Create a database connection
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->getConnect();
 
 // Insert into the employers table
 $query = "INSERT INTO employers (user_id, company_name, industry, company_description, company_size, location, founded_year, logo, contact_number)

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../PHP/Database.php';
+require_once '../DATABASE/dbConnection.php';
 
 // Check if the user is logged in and is an employer
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'employer') {
@@ -13,7 +13,7 @@ $user_id = $_SESSION['user_id'];
 
 // Database connection
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->getConnect();
 
 // Fetch employer details
 $employerQuery = "SELECT * FROM employers WHERE user_id = :user_id";
@@ -47,7 +47,7 @@ $jobPostings = $jobStmt->fetchAll(PDO::FETCH_ASSOC);
                 <li><a href="../PHP/employer_manage_job.php">Manage Job Listings</a></li>
                 <li><a href="../PHP/employer_view_applicants.php">View Applicants</a></li>
                 <li><a href="../PHP/employer_company_profile.php">Company Profile</a></li>
-                <li><a href="../PHP/logout.php">Logout</a></li>
+                <li><a href="../EMPLOYER/logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
