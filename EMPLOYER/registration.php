@@ -1,8 +1,7 @@
 <?php
-// Include necessary files for database connection and employer class
+session_start();
 require_once '../DATABASE/dbConnection.php';
-require_once '../EMPLOYER/crudEmployer.php'; // Path to Employer.php
-session_start(); // Ensure session is started to access session variables
+require_once '../EMPLOYER/employerCrud.php'; // Path to Employer.php
 
 // Process form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

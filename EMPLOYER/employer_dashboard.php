@@ -3,10 +3,10 @@ session_start();
 require_once '../DATABASE/dbConnection.php';
 
 // Check if the user is logged in and is an employer
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'employer') {
-    header("Location: ../HTML/main_login.html");
-    exit;
-}
+// if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'employer') {
+//     header("Location: ../HTML/main_login.html");
+//     exit;
+// }
 
 // Get the logged-in user's ID
 $user_id = $_SESSION['user_id'];
