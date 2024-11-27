@@ -24,6 +24,7 @@ class Employer {
                   (user_id, company_name, industry, company_description, company_size, location, founded_year, logo, contact_number) 
                   VALUES 
                   (:user_id, :company_name, :industry, :company_description, :company_size, :location, :founded_year, :logo, :contact_number)";
+        
         $stmt = $this->conn->prepare($query);
 
         // Bind parameters
@@ -37,7 +38,16 @@ class Employer {
         $stmt->bindParam(':logo', $this->logo);
         $stmt->bindParam(':contact_number', $this->contact_number);
 
-        return $stmt->execute();
+        try {
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            // Log or display error message
+            return false;
+        }
     }
 
     // Read all employers
@@ -49,29 +59,35 @@ class Employer {
         return $stmt;
     }
 
-    // Update employer
-    public function update() {
-        $query = "UPDATE " . $this->tbl_name . " 
-                  SET company_name = :company_name, industry = :industry, company_description = :company_description, 
-                      company_size = :company_size, location = :location, founded_year = :founded_year, 
-                      logo_url = :logo, contact_number = :contact_number 
-                  WHERE id = :id";
+// Update employer
+public function update() {
+    $query = "UPDATE " . $this->tbl_name . " 
+              SET company_name = :company_name, 
+                  industry = :industry, 
+                  company_description = :company_description, 
+                  company_size = :company_size, 
+                  location = :location, 
+                  founded_year = :founded_year, 
+                  logo = :logo, 
+                  contact_number = :contact_number
+              WHERE user_id = :user_id";  // Make sure we're updating by user_id
 
-        $stmt = $this->conn->prepare($query);
+    $stmt = $this->conn->prepare($query);
 
-        // Bind parameters
-        $stmt->bindParam(':company_name', $this->company_name);
-        $stmt->bindParam(':industry', $this->industry);
-        $stmt->bindParam(':company_description', $this->company_description);
-        $stmt->bindParam(':company_size', $this->company_size);
-        $stmt->bindParam(':location', $this->location);
-        $stmt->bindParam(':founded_year', $this->founded_year);
-        $stmt->bindParam(':logo', $this->logo);
-        $stmt->bindParam(':contact_number', $this->contact_number);
-        $stmt->bindParam(':id', $this->id);
+    // Bind parameters
+    $stmt->bindParam(':company_name', $this->company_name);
+    $stmt->bindParam(':industry', $this->industry);
+    $stmt->bindParam(':company_description', $this->company_description);
+    $stmt->bindParam(':company_size', $this->company_size);
+    $stmt->bindParam(':location', $this->location);
+    $stmt->bindParam(':founded_year', $this->founded_year);
+    $stmt->bindParam(':logo', $this->logo);
+    $stmt->bindParam(':contact_number', $this->contact_number);
+    $stmt->bindParam(':user_id', $this->user_id); // Ensure we're updating the current user's profile
 
-        return $stmt->execute();
-    }
+    return $stmt->execute();
+}
+
 
     // Delete employer
     public function delete() {
@@ -81,7 +97,16 @@ class Employer {
 
         $stmt->bindParam(':id', $this->id);
 
-        return $stmt->execute();
+        try {
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            // Log or display error message
+            return false;
+        }
     }
 }
 ?>
