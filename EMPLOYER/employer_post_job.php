@@ -18,6 +18,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <header>
+        <nav class="section-navbar">
+            <ul>
+                <li><a href="../EMPLOYER/employer_post_job.php">Post/Manage Job</a></li>
+                <li><a href="../EMPLOYER/employer_view_applicants.php">View Applicants</a></li>
+                <li><a href="../EMPLOYER/employer_company_profile.php">Company Profile</a></li>
+                <li><a href="../EMPLOYER/logout.php">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
     <h2>Create Job Posting</h2>
     <form id="createJobForm">
         Job Title: <input type="text" name="job_title" required>
@@ -95,7 +105,7 @@
                 const formData = $(this).serialize();
 
                 $.ajax({
-                    url: 'create_job.php',
+                    url: '../EMPLOYER/create_job.php',
                     method: 'POST',
                     data: formData,
                     success: function (response) {
@@ -112,7 +122,7 @@
             // Fetch and display jobs
             function fetchJobs() {
                 $.ajax({
-                    url: 'fetch_jobs.php',
+                    url: '../EMPLOYER/fetch_job.php',
                     method: 'GET',
                     success: function (data) {
                         jobTable.clear().rows.add(JSON.parse(data)).draw();
@@ -129,7 +139,7 @@
 
                 // Fetch job details
                 $.ajax({
-                    url: 'get_job.php',
+                    url: '../EMPLOYER/get_job.php',
                     method: 'GET',
                     data: { id: jobId },
                     success: function (data) {
@@ -155,7 +165,7 @@
                 const formData = $(this).serialize();
 
                 $.ajax({
-                    url: 'edit_job.php',
+                    url: '../EMPLOYER/edit_job.php',
                     method: 'POST',
                     data: formData,
                     success: function (response) {

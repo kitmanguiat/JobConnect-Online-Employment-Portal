@@ -1,6 +1,6 @@
 <?php
-require_once 'dbConnection.php';
-require_once 'JobPosting.php';
+require_once '../DATABASE/dbConnection.php';
+require_once '../EMPLOYER/jobCrud.php';
 
 $database = new Database();
 $db = $database->getConnect();

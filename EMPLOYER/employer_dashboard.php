@@ -2,11 +2,11 @@
 session_start();
 require_once '../DATABASE/dbConnection.php';
 
-// Check if the user is logged in and is an employer
-// if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'employer') {
-//     header("Location: ../HTML/main_login.html");
-//     exit;
-// }
+//Check if the user is logged in and is an employer
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'employer') {
+    header("Location: ../LOGIN/login.php");
+    exit;
+}
 
 // Get the logged-in user's ID
 $user_id = $_SESSION['user_id'];
@@ -43,10 +43,10 @@ $jobPostings = $jobStmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
         <nav class="section-navbar">
             <ul>
-                <li><a href="../PHP/employer_post_job.php">Post a Job</a></li>
-                <li><a href="../PHP/employer_manage_job.php">Manage Job Listings</a></li>
-                <li><a href="../PHP/employer_view_applicants.php">View Applicants</a></li>
-                <li><a href="../PHP/employer_company_profile.php">Company Profile</a></li>
+                <li><a href="../EMPLOYER/employer_post_job.php">Post/Manage Job</a></li>
+                <li><a href="../EMPLOYER/employer_manage_job.php">Manage Job Listings</a></li>
+                <li><a href="../EMPLOYER/employer_view_applicants.php">View Applicants</a></li>
+                <li><a href="../EMPLOYER/employer_company_profile.php">Company Profile</a></li>
                 <li><a href="../EMPLOYER/logout.php">Logout</a></li>
             </ul>
         </nav>

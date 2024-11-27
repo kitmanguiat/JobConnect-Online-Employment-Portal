@@ -25,12 +25,17 @@ if ($num > 0) {
         // Verify email and password
         if ($email === $row['email'] && password_verify($password, $row['password'])) {
             $isAuthenticated = true; // Mark as authenticated
-            $role = $row['role'];
+
+            // Set session variables
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['role'] = $row['role'];
 
             // Redirect based on role
-            if ($role === "job-seeker") {
+            if ($row['role'] === "job-seeker") {
                 header('Location: ../JOBSEEKER/jobseeker_registration.php');
-            } elseif ($role === "employer") {
+            } elseif ($row['role'] === "employer") {
                 header('Location: ../EMPLOYER/employer_registration.php');
             }
             exit; // Stop further script execution after redirection
@@ -38,9 +43,29 @@ if ($num > 0) {
     }
 
     if (!$isAuthenticated) {
-        echo "Invalid email or password.";
+        echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            Swal.fire({
+                title: 'Error!',
+                text: 'Invalid email or password.',
+                icon: 'error'
+            }).then(() => {
+                window.location.href = '../HTML/main_login.html';
+            });
+        </script>";
     }
 } else {
-    echo "No users found in the system.";
+    echo "
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: 'No users found in the system.',
+            icon: 'error'
+        }).then(() => {
+            window.location.href = '../HTML/main_login.html';
+        });
+    </script>";
 }
 ?>
