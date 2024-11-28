@@ -1,7 +1,7 @@
 <?php
 class Employer {
     private $conn;
-    private $tbl_name = "employers";
+    private const tbl_name = "employers";
 
     public $id; 
     public $user_id;
@@ -18,16 +18,12 @@ class Employer {
         $this->conn = $db;
     }
 
-    // Insert new employer
     public function create() {
-        $query = "INSERT INTO " . $this->tbl_name . " 
+        $query = "INSERT INTO " . self::tbl_name . "
                   (user_id, company_name, industry, company_description, company_size, location, founded_year, logo, contact_number) 
-                  VALUES 
-                  (:user_id, :company_name, :industry, :company_description, :company_size, :location, :founded_year, :logo, :contact_number)";
+                  VALUES (:user_id, :company_name, :industry, :company_description, :company_size, :location, :founded_year, :logo, :contact_number)";
         
         $stmt = $this->conn->prepare($query);
-
-        // Bind parameters
         $stmt->bindParam(':user_id', $this->user_id);
         $stmt->bindParam(':company_name', $this->company_name);
         $stmt->bindParam(':industry', $this->industry);
@@ -39,72 +35,72 @@ class Employer {
         $stmt->bindParam(':contact_number', $this->contact_number);
 
         try {
-            if ($stmt->execute()) {
-                return true;
-            } else {
-                return false;
-            }
+            return $stmt->execute();
         } catch (Exception $e) {
-            // Log or display error message
+            error_log($e->getMessage());
             return false;
         }
     }
 
-    // Read all employers
     public function read() {
-        $query = "SELECT * FROM " . $this->tbl_name;
+        $query = "SELECT * FROM " . self::tbl_name;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-
         return $stmt;
     }
 
-// Update employer
-public function update() {
-    $query = "UPDATE " . $this->tbl_name . " 
-              SET company_name = :company_name, 
-                  industry = :industry, 
-                  company_description = :company_description, 
-                  company_size = :company_size, 
-                  location = :location, 
-                  founded_year = :founded_year, 
-                  logo = :logo, 
-                  contact_number = :contact_number
-              WHERE user_id = :user_id";  // Make sure we're updating by user_id
+    public function readByUserId() {
+        $query = "SELECT * FROM " . self::tbl_name . " WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $this->user_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
-    $stmt = $this->conn->prepare($query);
+    public function update() {
+        $query = "UPDATE " . self::tbl_name . " 
+                  SET company_name = :company_name, industry = :industry, 
+                      company_description = :company_description, 
+                      company_size = :company_size, location = :location, 
+                      founded_year = :founded_year, contact_number = :contact_number";
 
-    // Bind parameters
-    $stmt->bindParam(':company_name', $this->company_name);
-    $stmt->bindParam(':industry', $this->industry);
-    $stmt->bindParam(':company_description', $this->company_description);
-    $stmt->bindParam(':company_size', $this->company_size);
-    $stmt->bindParam(':location', $this->location);
-    $stmt->bindParam(':founded_year', $this->founded_year);
-    $stmt->bindParam(':logo', $this->logo);
-    $stmt->bindParam(':contact_number', $this->contact_number);
-    $stmt->bindParam(':user_id', $this->user_id); // Ensure we're updating the current user's profile
+        if (!empty($this->logo)) {
+            $query .= ", logo = :logo";
+        }
 
-    return $stmt->execute();
-}
-
-
-    // Delete employer
-    public function delete() {
-        $query = "DELETE FROM " . $this->tbl_name . " WHERE id = :id";
+        $query .= " WHERE user_id = :user_id";
 
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':company_name', $this->company_name);
+        $stmt->bindParam(':industry', $this->industry);
+        $stmt->bindParam(':company_description', $this->company_description);
+        $stmt->bindParam(':company_size', $this->company_size);
+        $stmt->bindParam(':location', $this->location);
+        $stmt->bindParam(':founded_year', $this->founded_year);
+        $stmt->bindParam(':contact_number', $this->contact_number);
+        $stmt->bindParam(':user_id', $this->user_id);
 
+        if (!empty($this->logo)) {
+            $stmt->bindParam(':logo', $this->logo);
+        }
+
+        try {
+            return $stmt->execute();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public function delete() {
+        $query = "DELETE FROM " . self::tbl_name . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $this->id);
 
         try {
-            if ($stmt->execute()) {
-                return true;
-            } else {
-                return false;
-            }
+            return $stmt->execute();
         } catch (Exception $e) {
-            // Log or display error message
+            error_log($e->getMessage());
             return false;
         }
     }

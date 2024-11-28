@@ -12,7 +12,7 @@
 <body>
     <div class="container mt-5">
         <h2 class="mb-4">Employer Registration</h2>
-        <form action="../EMPLOYER/registration.php" method="POST" enctype="multipart/form-data">
+        <form action="../EMPLOYER/registration_process.php" method="POST" enctype="multipart/form-data">
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="company_name" class="form-label">Company Name:</label>

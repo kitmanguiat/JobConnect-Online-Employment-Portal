@@ -22,7 +22,7 @@ class JobPosting {
         $query = "INSERT INTO " . $this->tbl_name . " (employer_id, job_title, description, requirements, location, salary, status) 
                   VALUES (:employer_id, :job_title, :description, :requirements, :location, :salary, :status)";
         $stmt = $this->conn->prepare($query);
-
+    
         $stmt->bindParam(':employer_id', $this->employer_id);
         $stmt->bindParam(':job_title', $this->job_title);
         $stmt->bindParam(':description', $this->description);
@@ -30,8 +30,13 @@ class JobPosting {
         $stmt->bindParam(':location', $this->location);
         $stmt->bindParam(':salary', $this->salary);
         $stmt->bindParam(':status', $this->status);
-
-        return $stmt->execute();
+    
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            file_put_contents("error_log.txt", $e->getMessage(), FILE_APPEND); // Log the error
+            return false;
+        }
     }
 
     // Read all job postings
