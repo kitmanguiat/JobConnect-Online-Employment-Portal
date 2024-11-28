@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); // Ensure session_start is the very first line
 require_once '../DATABASE/dbConnection.php';
 require_once '../EMPLOYER/employerCrud.php'; // Path to Employer.php
 
@@ -16,7 +16,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_SESSION['user_id'])) {
         $employer->user_id = $_SESSION['user_id']; // Assign user_id from session
     } else {
-        echo "Error: User not logged in.";
+        echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            Swal.fire({
+                title: 'Error!',
+                text: 'User not logged in. Please log in and try again.',
+                icon: 'error'
+            }).then(() => {
+                window.location.href = '../login.php'; // Redirect to login
+            });
+        </script>";
         exit;
     }
 
@@ -31,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Handle file upload for the company logo
     if (isset($_FILES['logo']) && $_FILES['logo']['error'] === 0) {
-        // File upload logic here (as described in the previous example)
         $logo_tmp = $_FILES['logo']['tmp_name'];
         $logo_name = $_FILES['logo']['name'];
         $logo_extension = strtolower(pathinfo($logo_name, PATHINFO_EXTENSION));
@@ -48,34 +57,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (move_uploaded_file($logo_tmp, $logo_dir . $logo_new_name)) {
                 $employer->logo = $logo_dir . $logo_new_name;
             } else {
-                echo "Error uploading logo.";
+                echo "
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Error uploading logo. Please try again.',
+                        icon: 'error'
+                    }).then(() => {
+                        window.history.back(); // Return to the form
+                    });
+                </script>";
                 exit;
-            }   
+            }
         } else {
-            echo "Invalid file type.";
+            echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                Swal.fire({
+                    title: 'Invalid File!',
+                    text: 'Only JPG, JPEG, PNG, or GIF files are allowed.',
+                    icon: 'error'
+                }).then(() => {
+                    window.history.back(); // Return to the form
+                });
+            </script>";
             exit;
         }
     } else {
-        $employer->logo = null;
+        $employer->logo = null; // Logo is optional
     }
 
     // Attempt to create the employer in the database
     if ($employer->create()) {
+        // Retrieve the last inserted employer ID
+        $employer_id = $db->lastInsertId();
+
+        // Store employer ID in the session
+        $_SESSION['employer_id'] = $employer_id;
+
+        // Success - redirect using PHP header()
+        header("Location: ../EMPLOYER/employer_dashboard.php");
+        exit; // Ensure no further code is executed after the redirect
+    } else {
         echo "
         <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
         <script>
             Swal.fire({
-                title: 'Success!',
-                text: 'Employer registration successful!',
-                icon: 'success'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '../EMPLOYER/employer_dashboard.php';
-                }
+                title: 'Error!',
+                text: 'Registration failed. Please check your details and try again.',
+                icon: 'error'
+            }).then(() => {
+                window.history.back(); // Return to the form
             });
         </script>";
-    } else {
-        echo "Error during registration.";
     }
 }
 ?>
