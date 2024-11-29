@@ -3,7 +3,7 @@ class Employer {
     private $conn;
     private const tbl_name = "employers";
 
-    public $id; 
+    public $employer_id; 
     public $user_id;
     public $company_name;
     public $industry;
@@ -95,7 +95,7 @@ class Employer {
     public function delete() {
         $query = "DELETE FROM " . self::tbl_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':employer_id', $this->employer_id);
 
         try {
             return $stmt->execute();
