@@ -63,10 +63,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Update the employer profile
     if ($employer->update()) {
+        // Refresh employer data
+        $stmt = $db->prepare("SELECT * FROM employers WHERE user_id = :user_id");
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        $employer_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
         echo "Profile updated successfully!";
         header("Location: ../EMPLOYER/employer_company_profile.php");
+        exit;
     } else {
-        echo "Failed to update profile.";
+        $errorInfo = $stmt->errorInfo();
+        echo "Failed to update profile: " . $errorInfo[2];
     }
 }
 ?>
