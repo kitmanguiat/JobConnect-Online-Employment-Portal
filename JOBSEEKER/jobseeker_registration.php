@@ -1,32 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job-Seeker Registration</title>
-</head>
-<body>
-    <h1>Job-Seeker Registration</h1>
-    <form action="../PHP/JobSeekerController.php" method="POST" enctype="multipart/form-data">
-        <label for="resume">Resume (Text):</label><br>
-        <textarea name="resume" rows="5" required></textarea><br>
+<form action="register_jobseeker.php" method="POST" enctype="multipart/form-data">
+    <label for="full_name">Full Name:</label>
+    <input type="text" name="full_name" required><br>
 
-        <label for="skills">Skills (comma-separated):</label><br>
-        <input type="text" name="skills" required><br>
+    <label for="resume">Resume (PDF, DOC, DOCX):</label>
+    <input type="file" name="resume" accept=".pdf,.doc,.docx" required><br>
 
-        <label for="experience">Experience:</label><br>
-        <textarea name="experience" rows="5" required></textarea><br>
+    <label for="availability">Availability:</label>
+    <select name="availability" required>
+        <option value="Full-time">Full-time</option>
+        <option value="Part-time">Part-time</option>
+        <option value="Freelance">Freelance</option>
+        <option value="Contract">Contract</option>
+        <option value="Internship">Internship</option>
+        <option value="Negotiable">Negotiable</option>
+    </select><br>
 
-        <label for="location">Location:</label><br>
-        <input type="text" name="location" required><br>
+    <label for="location">Location:</label>
+    <input type="text" name="location" required><br>
 
-        <label for="phone_number">Phone Number:</label><br>
-        <input type="text" name="phone_number" required><br>
+    <label for="phone_number">Phone Number:</label>
+    <input type="text" name="phone_number" required><br>
 
-        <label for="profile_picture">Profile Picture:</label><br>
-        <input type="file" name="profile_picture" accept="image/*"><br><br>
+    <label for="profile_picture_url">Profile Picture:</label>
+    <input type="file" name="profile_picture_url"><br>
 
-        <button type="submit" name="register_jobseeker">Register</button>
-    </form>
-</body>
-</html>
+    <button type="submit">Register</button>
+</form>
