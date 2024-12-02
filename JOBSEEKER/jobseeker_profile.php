@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <option value="freelance" <?php echo ($jobSeekerData['availability'] == 'freelance') ? 'selected' : ''; ?>>Freelance</option>
         </select><br>
 
-        <label for="location">Location:</label>
+        <label for="location">Address:</label>
         <input type="text" name="location" value="<?php echo htmlspecialchars($jobSeekerData['location']); ?>" required><br>
 
         <label for="phone_number">Phone Number:</label>

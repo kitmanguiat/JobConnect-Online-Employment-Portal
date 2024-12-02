@@ -1,7 +1,7 @@
 <?php
 
 class Database {
-//tie
+//tieg
     private $host = "localhost";
     private $db_name = "jobconnect";  // Change this to your database name
     private $username = "root";       // Change this to your database username
