@@ -6,7 +6,7 @@ $database = new Database();
 $db = $database->getConnect();
 
 $jobPosting = new JobPosting($db);
-$jobPosting->id = $_POST['id'];
+$jobPosting->job_posting_id = $_POST['job_posting_id'];
 
 if ($jobPosting->delete()) {
     echo "Job deleted successfully!";

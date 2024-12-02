@@ -38,7 +38,7 @@ try {
     }
 
     // Check if the employer exists in the database
-    $validateEmployerQuery = "SELECT COUNT(*) FROM employers WHERE id = :employer_id";
+    $validateEmployerQuery = "SELECT COUNT(*) FROM employers WHERE employer_id = :employer_id";
     $validateStmt = $db->prepare($validateEmployerQuery);
     $validateStmt->bindParam(':employer_id', $jobPosting->employer_id, PDO::PARAM_INT);
     $validateStmt->execute();

@@ -25,7 +25,7 @@
                 <li><a href="../EMPLOYER/employer_post_job.php">Post/Manage Job</a></li>
                 <li><a href="../EMPLOYER/employer_view_applicants.php">View Applicants</a></li>
                 <li><a href="../EMPLOYER/employer_company_profile.php">Company Profile</a></li>
-                <li><a href="../EMPLOYER/logout.php">Logout</a></li>
+                <li><a href="../LOGIN/logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -72,7 +72,7 @@
     <div id="editJobModal" style="display: none;">
         <h2>Edit Job Posting</h2>
         <form id="editJobForm">
-            <input type="hidden" name="id" id="editJobId">
+            <input type="hidden" name="job_posting_id" id="editJobId">
             Job Title: <input type="text" name="job_title" id="editJobTitle" required>
             <br><br>
             Description: <textarea name="description" id="editDescription" required></textarea>

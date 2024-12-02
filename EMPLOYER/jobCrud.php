@@ -4,7 +4,7 @@ class JobPosting {
     private $conn;
     private $tbl_name = "job_postings";
 
-    public $id;
+    public $job_posting_id;
     public $employer_id;
     public $job_title;
     public $description;
@@ -61,7 +61,7 @@ class JobPosting {
         $stmt->bindParam(':location', $this->location);
         $stmt->bindParam(':salary', $this->salary);
         $stmt->bindParam(':status', $this->status);
-        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':job_posting_id', $this->job_posting_id);
 
         return $stmt->execute();
     }
@@ -72,7 +72,7 @@ class JobPosting {
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':job_posting_id', $this->job_posting_id);
 
         return $stmt->execute();
     }
