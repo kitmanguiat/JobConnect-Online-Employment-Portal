@@ -68,7 +68,7 @@ class JobPosting {
 
     // Delete job posting
     public function delete() {
-        $query = "DELETE FROM " . $this->tbl_name . " WHERE id = :id";
+        $query = "DELETE FROM " . $this->tbl_name . " WHERE job_posting_id = :job_posting_id";
 
         $stmt = $this->conn->prepare($query);
 
