@@ -51,7 +51,7 @@ class JobPosting {
     // Update job posting
     public function update() {
         $query = "UPDATE " . $this->tbl_name . " SET job_title = :job_title, description = :description, requirements = :requirements, 
-                  location = :location, salary = :salary, status = :status WHERE id = :id";
+                  location = :location, salary = :salary, status = :status WHERE job_posting_id = :job_posting_id";
 
         $stmt = $this->conn->prepare($query);
 
@@ -77,4 +77,4 @@ class JobPosting {
         return $stmt->execute();
     }
 }
-?>
+?> 

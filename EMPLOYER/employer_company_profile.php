@@ -40,8 +40,8 @@ if (!$employer_data) {
     <header>
         <nav class="section-navbar">
             <ul>
+                <li><a href="../EMPLOYER/employer_dashboard.php">Dashboard</a></li>
                 <li><a href="../EMPLOYER/employer_post_job.php">Post/Manage Job</a></li>
-                <li><a href="../EMPLOYER/employer_manage_job.php">Manage Job Listings</a></li>
                 <li><a href="../EMPLOYER/employer_view_applicants.php">View Applicants</a></li>
                 <li><a href="../EMPLOYER/employer_company_profile.php">Company Profile</a></li>
                 <li><a href="../LOGIN/logout.php">Logout</a></li>
