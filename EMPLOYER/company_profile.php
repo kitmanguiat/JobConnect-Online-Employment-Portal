@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $employer_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         echo "Profile updated successfully!";
-        header("Location: ../EMPLOYER/employer_company_profile.php");
+        header("Location: ../EMPLOYER/employer_dashboard.php");
         exit;
     } else {
         $errorInfo = $stmt->errorInfo();
