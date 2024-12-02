@@ -32,11 +32,37 @@ if ($num > 0) {
             $_SESSION['email'] = $row['email'];
             $_SESSION['role'] = $row['role'];
 
-            // Redirect based on role
+            // Check if the user is a job-seeker or employer
             if ($row['role'] === "job-seeker") {
-                header('Location: ../JOBSEEKER/jobseeker_registration.php');
+                // Check if job-seeker profile exists
+                $jobSeekerCheckQuery = "SELECT job_seeker_id FROM job_seekers WHERE user_id = :user_id";
+                $stmt = $db->prepare($jobSeekerCheckQuery);
+                $stmt->bindParam(':user_id', $row['user_id']);
+                $stmt->execute();
+
+                if ($stmt->rowCount() > 0) {
+                    // Job-seeker profile exists, redirect to dashboard
+                    $_SESSION['job_seeker_id'] = $stmt->fetch(PDO::FETCH_ASSOC)['job_seeker_id'];
+                    header('Location: ../JOBSEEKER/jobseeker_dashboard.php');
+                } else {
+                    // Job-seeker not registered, proceed with registration
+                    header('Location: ../JOBSEEKER/jobseeker_registration.php');
+                }
             } elseif ($row['role'] === "employer") {
-                header('Location: ../EMPLOYER/employer_registration.php');
+                // Check if employer profile exists
+                $employerCheckQuery = "SELECT employer_id FROM employers WHERE user_id = :user_id";
+                $stmt = $db->prepare($employerCheckQuery);
+                $stmt->bindParam(':user_id', $row['user_id']);
+                $stmt->execute();
+
+                if ($stmt->rowCount() > 0) {
+                    // Employer profile exists, redirect to dashboard
+                    $_SESSION['employer_id'] = $stmt->fetch(PDO::FETCH_ASSOC)['employer_id'];
+                    header('Location: ../EMPLOYER/employer_dashboard.php');
+                } else {
+                    // Employer not registered, proceed with registration
+                    header('Location: ../EMPLOYER/employer_registration.php');
+                }
             }
             exit; // Stop further script execution after redirection
         }
