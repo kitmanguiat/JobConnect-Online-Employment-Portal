@@ -1,53 +1,58 @@
 <?php
+session_start();
 require_once '../DATABASE/dbConnection.php';
+require_once '../EMPLOYER/jobCrud.php';
 
 try {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    session_start(); // Start session to access employer_id
 
-    if (!isset($_SESSION['employer_id'])) {
-        error_log("Session error: Employer ID not set.");
-        http_response_code(400);
+    // Establish database connection
+    $database = new Database();
+    $db = $database->getConnect();
+
+    // Initialize JobPosting object
+    $jobPosting = new JobPosting($db);
+
+    // Set job posting properties (ensure proper validation)
+    if (isset($_SESSION['employer_id'])) {
+        $jobPosting->employer_id = $_SESSION['employer_id']; // Get the employer ID from the session
+    } else {
+        http_response_code(400); // Bad Request
         echo json_encode(["message" => "Employer not logged in."]);
         exit;
     }
 
-    $database = new Database();
-    $db = $database->getConnect();
+    // Set job posting details from the POST request
+    $jobPosting->job_title = trim($_POST['job_title']);
+    $jobPosting->description = trim($_POST['description']);
+    $jobPosting->requirements = trim($_POST['requirements']);
+    $jobPosting->location = trim($_POST['location']);
+    $jobPosting->salary = floatval($_POST['salary']);
+    $jobPosting->status = trim($_POST['status']);
 
-    $employer_id = $_SESSION['employer_id'];
-    $job_title = trim($_POST['job_title'] ?? '');
-    $description = trim($_POST['description'] ?? '');
-    $requirements = trim($_POST['requirements'] ?? '');
-    $location = trim($_POST['location'] ?? '');
-    $salary = floatval($_POST['salary'] ?? 0);
-    $status = trim($_POST['status'] ?? '');
-
-    if (
-        empty($job_title) || empty($description) || empty($requirements) ||
-        empty($location) || $salary <= 0 || empty($status)
-    ) {
-        error_log("Validation error: Missing required fields.");
-        http_response_code(400);
-        echo json_encode(["message" => "All fields are required and salary must be a positive number."]);
+    // Additional validation for critical fields
+    if (empty($jobPosting->job_title) || empty($jobPosting->description) || empty($jobPosting->employer_id) ||
+        empty($jobPosting->location) || empty($jobPosting->salary) || empty($jobPosting->status)) {
+        http_response_code(400); // Bad Request
+        echo json_encode(["message" => "Missing required fields."]);
         exit;
     }
 
-    $query = "INSERT INTO job_postings (employer_id, job_title, description, requirements, location, salary, status)
-              VALUES (:employer_id, :job_title, :description, :requirements, :location, :salary, :status)";
-    $stmt = $db->prepare($query);
+    // Check if the employer exists in the database
+    $validateEmployerQuery = "SELECT COUNT(*) FROM employers WHERE id = :employer_id";
+    $validateStmt = $db->prepare($validateEmployerQuery);
+    $validateStmt->bindParam(':employer_id', $jobPosting->employer_id, PDO::PARAM_INT);
+    $validateStmt->execute();
 
-    $stmt->bindParam(':employer_id', $employer_id);
-    $stmt->bindParam(':job_title', $job_title);
-    $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':requirements', $requirements);
-    $stmt->bindParam(':location', $location);
-    $stmt->bindParam(':salary', $salary);
-    $stmt->bindParam(':status', $status);
+    if ($validateStmt->fetchColumn() == 0) {
+        http_response_code(404); // Not Found
+        echo json_encode(["message" => "Employer not found."]);
+        exit;
+    }
 
-    if ($stmt->execute()) {
-        http_response_code(201);
+    // Attempt to create the job posting
+    if ($jobPosting->create()) {
+        http_response_code(201); // Created
         echo json_encode(["message" => "Job created successfully!"]);
     } else {
         error_log("SQL error: " . print_r($stmt->errorInfo(), true));
