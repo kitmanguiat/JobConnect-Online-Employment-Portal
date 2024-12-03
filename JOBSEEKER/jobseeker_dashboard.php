@@ -44,7 +44,7 @@ if (!$jobSeekerData) {
         <nav>
             <ul>
                 <li><a href="../JOBSEEKER/jobseeker_profile.php">Profile</a></li>
-                <li><a href="view_jobs.php">View Jobs</a></li>
+                <li><a href="../JOBSEEKER/jobseeker_viewjobs.php">View Jobs</a></li>
                 <li><a href="../LOGIN/logout.php">Logout</a></li>
             </ul>
         </nav>

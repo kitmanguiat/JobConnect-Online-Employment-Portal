@@ -15,7 +15,7 @@
         <option value="Negotiable">Negotiable</option>
     </select><br>
 
-    <label for="location">Location:</label>
+    <label for="location">Address:</label>
     <input type="text" name="location" required><br>
 
     <label for="phone_number">Phone Number:</label>
