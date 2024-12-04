@@ -37,6 +37,7 @@ if (!$jobSeekerData) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Seeker Dashboard</title>
+ 
 </head>
 <body>
     <header>
@@ -44,7 +45,7 @@ if (!$jobSeekerData) {
         <nav>
             <ul>
                 <li><a href="../JOBSEEKER/jobseeker_profile.php">Profile</a></li>
-                <li><a href="../JOBSEEKER/jobseeker_viewjobs.php">View Jobs</a></li>
+                <li><a href="../JOBSEEKER/jobseeker_viewjob.php">View Jobs</a></li>
                 <li><a href="../LOGIN/logout.php">Logout</a></li>
             </ul>
         </nav>
@@ -67,7 +68,7 @@ if (!$jobSeekerData) {
             <?php endif; ?>
         </p>
 
-        <a href="edit_profile.php">Edit Profile</a>
+        <a href="../JOBSEEKER/jobseeker_profile.php">Edit Profile</a>
     </section>
 
     <footer>
