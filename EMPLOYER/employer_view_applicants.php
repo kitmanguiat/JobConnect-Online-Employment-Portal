@@ -4,33 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Applicants</title>
-    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        $(document).ready(function() {
-            // Fetch applicants for a specific job posting
-            const jobPostingId = 1; // Replace with dynamic ID
-            fetchApplicants(jobPostingId);
+       $(document).ready(function() {
+    // Example jobPostingId - Replace with dynamic value in your actual code
+    const jobPostingId = 1; // Replace with the actual job posting ID
 
-            // Initialize DataTable
-            $('#applicantsTable').DataTable();
+    fetchApplicants(jobPostingId);
 
-            function fetchApplicants(jobPostingId) {
-                $.ajax({
-                    url: 'viewApplicants.php',
-                    method: 'GET',
-                    data: { job_posting_id: jobPostingId },
-                    success: function(response) {
-                        const data = JSON.parse(response);
-                        const table = $('#applicantsTable').DataTable();
-                        table.clear();
+    function fetchApplicants(jobPostingId) {
+        $.ajax({
+            url: '../EMPLOYER/viewApplicants.php',
+            method: 'GET',
+            data: { job_posting_id: jobPostingId },
+            success: function(response) {
+                console.log('Response from server:', response); // Debugging log
+                try {
+                    const data = JSON.parse(response);
+                    const table = $('#applicantsTable').DataTable();
+                    table.clear();
+
+                    if (data.length > 0) {
+                        // Populate DataTable with applicants data
                         data.forEach(applicant => {
                             table.row.add([
                                 applicant.application_id,
@@ -42,7 +41,7 @@
                             ]).draw();
                         });
 
-                        // Handle Accept/Reject actions
+                        // Accept/Reject button actions
                         $('.accept').on('click', function() {
                             updateStatus($(this).data('id'), 'accepted');
                         });
@@ -50,28 +49,36 @@
                         $('.reject').on('click', function() {
                             updateStatus($(this).data('id'), 'rejected');
                         });
-                    },
-                    error: function() {
-                        Swal.fire('Error', 'Failed to fetch applicants.', 'error');
+                    } else {
+                        Swal.fire('No applicants', 'No applicants found for this job posting.', 'info');
                     }
-                });
-            }
-
-            function updateStatus(applicationId, status) {
-                $.ajax({
-                    url: 'updateApplicationStatus.php',
-                    method: 'POST',
-                    data: { application_id: applicationId, status: status },
-                    success: function(response) {
-                        Swal.fire('Success', 'Application status updated.', 'success');
-                        fetchApplicants(jobPostingId); // Refresh table
-                    },
-                    error: function() {
-                        Swal.fire('Error', 'Failed to update status.', 'error');
-                    }
-                });
+                } catch (error) {
+                    console.error('Error parsing response:', error);
+                    Swal.fire('Error', 'Failed to load applicants.', 'error');
+                }
+            },
+            error: function() {
+                Swal.fire('Error', 'Failed to fetch applicants.', 'error');
             }
         });
+    }
+
+    function updateStatus(applicationId, status) {
+        $.ajax({
+            url: 'updateApplicationStatus.php',
+            method: 'POST',
+            data: { application_id: applicationId, status: status },
+            success: function(response) {
+                Swal.fire('Success', 'Application status updated.', 'success');
+                fetchApplicants(jobPostingId); // Refresh applicants table
+            },
+            error: function() {
+                Swal.fire('Error', 'Failed to update status.', 'error');
+            }
+        });
+    }
+});
+
     </script>
 </head>
 <body>

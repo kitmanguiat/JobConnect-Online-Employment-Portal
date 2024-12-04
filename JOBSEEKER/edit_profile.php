@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../DATABASE/dbConnection.php';
-require_once '../JOBSEEKER/jobSeekerCrud.php';
+require_once '../JOBSEEKER/jobseekerCrud.php';
 
 // Get the database connection
 $database = new Database();
