@@ -3,147 +3,99 @@ session_start();
 require_once '../DATABASE/dbConnection.php';
 require_once '../JOBSEEKER/applicationCrud.php';
 
-// Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    echo "You must be logged in to view this page.";
+    echo "You need to log in to view your applications.";
     exit;
 }
 
-// Fetch the job seeker's ID
-$user_id = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
 
-// Initialize database connection
-$database = new Database();
-$db = $database->getConnect();
-
-// Initialize job application class
-$jobApplication = new JobApplication($db);
-$jobApplication->job_seeker_id = $user_id;
-
-// Fetch the job applications
-$stmt = $jobApplication->fetchByJobSeeker();
-
-// Debugging step 1: Check query execution
-if (!$stmt) {
-    echo "Error fetching data: ";
-    print_r($db->errorInfo());
-    exit;
-}
-
-// Debugging step 2: Output raw results
-$applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if (empty($applications)) {
-    echo "No data found for this job seeker.";
-    // Optionally, remove the `exit;` if you want to display a proper message in HTML instead of exiting.
+try {
+    $applicationManager = new ApplicationManager();
+    $applications = $applicationManager->getApplicationsByJobSeeker($userId);
+} catch (Exception $e) {
+    echo $e->getMessage();
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Applications</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <title>My Job Applications</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Custom CSS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-    </style>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#applicationsTable').DataTable({
+                responsive: true,
+                paging: true,
+                search: true,
+                order: [[4, 'desc']], // Sort by application date by default
+                language: {
+                    emptyTable: "You haven't applied for any jobs yet.",
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-    <header>
-        <h1>My Applications</h1>
+<header>
+    <h1>Job Seeker Dashboard</h1>
         <nav>
             <ul>
                 <li><a href="../JOBSEEKER/jobseeker_dashboard.php">Dashboard</a></li>
                 <li><a href="../JOBSEEKER/jobseeker_profile.php">Profile</a></li>
-                <li><a href="../JOBSEEKER/jobseeker_view_job.php">View Jobs</a></li>
+                <li><a href="../JOBSEEKER/jobseeker_viewjob.php">View Jobs</a></li>
+                <li><a href="../JOBSEEKER/jobseeker_my_applications.php">View Application</a></li>
                 <li><a href="../LOGIN/logout.php">Logout</a></li>
             </ul>
         </nav>
-    </header>
-
-    <section>
-        <h2>Your Applications</h2>
-        <table id="applicationsTable">
-            <thead>
-                <tr>
-                    <th>Job Title</th>
-                    <th>Description</th>
-                    <th>Requirements</th>
-                    <th>Location</th>
-                    <th>Salary</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($applications as $application): ?>
+    <main>
+        <section>
+            <h2>My Job Applications</h2>
+            <table id="applicationsTable" class="display">
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars($application['job_title']); ?></td>
-                        <td><?= htmlspecialchars($application['description']); ?></td>
-                        <td><?= htmlspecialchars($application['requirements']); ?></td>
-                        <td><?= htmlspecialchars($application['location']); ?></td>
-                        <td><?= htmlspecialchars($application['salary']); ?></td>
-                        <td><?= htmlspecialchars($application['status']); ?></td>
+                        <th>Job Title</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        <th>Salary</th>
+                        <th>Application Date</th>
+                        <th>Status</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </section>
-
-    <script>
-        $(document).ready(function() {
-            $('#applicationsTable').DataTable();
-        });
-    </script>
+                </thead>
+                <tbody>
+                    <?php if (!empty($applications)) : ?>
+                        <?php foreach ($applications as $application) : ?>
+                            <tr>
+                                <td><?= htmlspecialchars($application['job_title']) ?></td>
+                                <td><?= htmlspecialchars(substr($application['description'], 0, 50)) ?>...</td>
+                                <td><?= htmlspecialchars($application['location']) ?></td>
+                                <td><?= htmlspecialchars(number_format($application['salary'], 2)) ?></td>
+                                <td><?= htmlspecialchars(date('F j, Y', strtotime($application['application_date']))) ?></td>
+                                <td>
+                                    <?php if ($application['status'] === 'accepted') : ?>
+                                        <span class="status accepted">✔ Accepted</span>
+                                    <?php elseif ($application['status'] === 'rejected') : ?>
+                                        <span class="status rejected">✘ Rejected</span>
+                                    <?php else : ?>
+                                        <span class="status pending">⏳ Pending</span>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="6">You haven't applied for any jobs yet.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </section>
+    </main>
 </body>
 </html>

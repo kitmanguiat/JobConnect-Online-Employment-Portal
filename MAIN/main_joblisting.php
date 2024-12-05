@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobConnect - Your Gateway to Career Opportunities</title>
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../CSS/main.css">
-
 </head>
 <body>
     <header>
@@ -56,11 +57,24 @@
                     <button onclick="fetchJobs()">Search</button>
                 </div>
                 
-                <!-- Job Listings -->
-                <div id="job-listings"></div>
+                <!-- Job Listings Table -->
+                <table id="job-listings-table" class="job-listings-table display">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Company</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="job-listings"></tbody>
+                </table>
             </div>
         </div>
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <script>
         function fetchJobs() {
@@ -69,7 +83,7 @@
             const search = document.getElementById("search").value;
             const location = document.getElementById("location-filter").value;
 
-            fetch(`job-listings.php?search=${search}&location=${location}`)
+            fetch(`../MAIN/FetchJobListings.php?search=${search}&location=${location}`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("loading").style.display = "none"; // Hide loading message
@@ -82,23 +96,25 @@
             jobListings.innerHTML = ""; // Clear previous results
 
             if (jobs.length === 0) {
-                jobListings.innerHTML = "<p>No job listings found.</p>";
+                jobListings.innerHTML = "<tr><td colspan='4'>No job listings found.</td></tr>";
                 return;
             }
 
             jobs.forEach(job => {
-                const jobDiv = document.createElement("div");
-                jobDiv.classList.add("job-listing");
+                const row = document.createElement("tr");
 
-                jobDiv.innerHTML = `
-                    <h3>${job.title}</h3>
-                    <p><strong>Company:</strong> ${job.company}</p>
-                    <p><strong>Location:</strong> ${job.location}</p>
-                    <p>${job.description}</p>
+                row.innerHTML = `
+                    <td>${job.title}</td>
+                    <td>${job.company}</td>
+                    <td>${job.location}</td>
+                    <td>${job.description}</td>
                 `;
 
-                jobListings.appendChild(jobDiv);
+                jobListings.appendChild(row);
             });
+
+            // Initialize DataTable after content is added
+            $('#job-listings-table').DataTable();
         }
 
         // Fetch all jobs on page load

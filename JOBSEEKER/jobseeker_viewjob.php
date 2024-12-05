@@ -85,7 +85,8 @@ $user_id = $_SESSION['user_id'];
             <ul>
                 <li><a href="../JOBSEEKER/jobseeker_dashboard.php">Dashboard</a></li>
                 <li><a href="../JOBSEEKER/jobseeker_profile.php">Profile</a></li>
-                <li><a href="../JOBSEEKER/jobseeker_view_job.php">View Jobs</a></li>
+                <li><a href="../JOBSEEKER/jobseeker_viewjob.php">View Jobs</a></li>
+                <li><a href="../JOBSEEKER/jobseeker_my_applications.php">View Application</a></li>
                 <li><a href="../LOGIN/logout.php">Logout</a></li>
             </ul>
         </nav>
