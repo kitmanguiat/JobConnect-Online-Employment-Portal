@@ -52,33 +52,6 @@
                 </div>
             </div>
         </section>
-
-        <main>
-            <!-- JobConnect Stats Section -->
-            <section class="stats">
-                <div class="container">
-                    <h2>JobConnect at a Glance</h2>
-                    <div class="grid">
-                        <div class="card">
-                            <div class="stat-number"><?php echo number_format($registeredJobSeekers); ?>+</div>
-                            <div class="stat-label">Registered Job Seekers</div>
-                        </div>
-                        <div class="card">
-                            <div class="stat-number"><?php echo number_format($registeredEmployers); ?>+</div>
-                            <div class="stat-label">Employer Partners</div>
-                        </div>
-                        <div class="card">
-                            <div class="stat-number"><?php echo number_format($activeJobListings); ?>+</div>
-                            <div class="stat-label">Active Job Listings</div>
-                        </div>
-                        <div class="card">
-                            <div class="stat-number"><?php echo number_format($successfulPlacements); ?>+</div>
-                            <div class="stat-label">Successful Placements</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
         
         <section class="how-it-works">
             <div class="container">

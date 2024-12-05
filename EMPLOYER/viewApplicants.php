@@ -11,15 +11,21 @@ if (isset($_GET['job_posting_id']) && is_numeric($_GET['job_posting_id'])) {
     // Log job_posting_id for debugging
     error_log('Received job_posting_id: ' . $jobPostingId); // Check if job_posting_id is correctly passed
 
-    // Query to fetch applicants for the given job posting
+    // Query to fetch applicants and job title for the given job posting
     $query = "
         SELECT 
             a.application_id,
+            jp.job_title AS job_title,           -- Added
             js.full_name AS job_seeker_name,
+            js.availability,                -- Added
+            js.location,                    -- Added
+            js.resume,                      -- Added
+            js.phone_number,                -- Added
             a.application_date,
             a.status
         FROM applications a
         JOIN job_seekers js ON a.job_seeker_id = js.job_seeker_id
+        JOIN job_postings jp ON a.job_posting_id = jp.job_posting_id -- Join to fetch job title
         WHERE a.job_posting_id = :job_posting_id
     ";
 

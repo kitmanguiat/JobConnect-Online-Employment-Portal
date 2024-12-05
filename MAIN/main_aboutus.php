@@ -67,8 +67,8 @@
         <div class="container">
             <h2>Ready to Get Started?</h2>
             <p>Join JobConnect today and take the next step in your career journey!</p>
-            <a href="main_signup.html" class="button">Create an Account</a>
-            <a href="main_joblisting.html" class="button">Browse Jobs</a>
+            <a href="../SIGNUP/signup.php" class="button">Create an Account</a>
+            <a href="../MAIN/main_joblisting.php" class="button">Browse Jobs</a>
         </div>
     </section>
 

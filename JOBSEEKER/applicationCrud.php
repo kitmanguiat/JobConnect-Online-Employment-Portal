@@ -75,4 +75,40 @@ class JobApplication {
         return false;
     }
 }
+
+class ApplicationManager {
+    private $db;
+
+    public function __construct() {
+        $database = new Database();
+        $this->db = $database->getConnect();
+    }
+
+    public function getApplicationsByJobSeeker($userId) {
+        $query = "
+            SELECT 
+                jp.job_title,
+                jp.description,
+                jp.location,
+                jp.salary,
+                a.application_date,
+                a.status
+            FROM applications a
+            JOIN job_postings jp ON a.job_posting_id = jp.job_posting_id
+            JOIN job_seekers js ON a.job_seeker_id = js.job_seeker_id
+            WHERE js.user_id = :user_id
+            ORDER BY a.application_date DESC
+        ";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new Exception("Error fetching applications: " . $e->getMessage());
+        }
+    }
+}
+
 ?>
