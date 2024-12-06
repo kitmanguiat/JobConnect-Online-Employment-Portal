@@ -102,13 +102,13 @@
     <table id="applicantsTable" class="display">
         <thead>
             <tr>
-                <th>Job Title</th>        <!-- Updated -->
+                <th>Job Title</th>        
                 <th>Applicant Name</th>
                 <th>Application Date</th>
-                <th>Availability</th>     <!-- Added -->
-                <th>Location</th>         <!-- Added -->
-                <th>Resume</th>           <!-- Added -->
-                <th>Phone Number</th>     <!-- Added -->
+                <th>Availability</th>     
+                <th>Location</th>         
+                <th>Resume</th>           
+                <th>Phone Number</th>     
                 <th>Status</th>
                 <th>Action</th>
             </tr>

@@ -18,6 +18,24 @@ class Employer {
         $this->conn = $db;
     }
 
+    // Get employer information by user ID
+    public function getEmployerByUserId() {
+        $query = "SELECT * FROM " . self::tbl_name . " WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $this->user_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the employer info
+    }
+
+    // Fetch job postings for a specific employer
+    public function getJobPostings() {
+        $query = "SELECT * FROM job_postings WHERE employer_id = :employer_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':employer_id', $this->employer_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all job postings
+    }
+
     public function create() {
         $query = "INSERT INTO " . self::tbl_name . "
                   (user_id, company_name, industry, company_description, company_size, location, founded_year, logo, contact_number) 

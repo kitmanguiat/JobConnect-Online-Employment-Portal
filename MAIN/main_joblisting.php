@@ -40,22 +40,7 @@
                 
                 <!-- Loading Indicator -->
                 <div id="loading">Loading jobs...</div>
-                
-                <!-- Search and Filter Section -->
-                <div class="search-filter">
-                    <input type="text" id="search" placeholder="Search jobs by title or company...">
-                    <select id="location-filter">
-                        <option value="">All Locations</option>
-                        <option value="Makati">Makati</option>
-                        <option value="Quezon City">Quezon City</option>
-                        <option value="Taguig">Taguig</option>
-                        <option value="Pasig">Pasig</option>
-                        <option value="Mandaluyong">Mandaluyong</option>
-                        <option value="Manila">Manila</option>
-                    </select>
-                    <button onclick="fetchJobs()">Search</button>
-                </div>
-                
+
                 <!-- Job Listings Table -->
                 <table id="job-listings-table" class="job-listings-table display">
                     <thead>
@@ -79,10 +64,7 @@
         function fetchJobs() {
             document.getElementById("loading").style.display = "block"; // Show loading message
 
-            const search = document.getElementById("search").value;
-            const location = document.getElementById("location-filter").value;
-
-            fetch(`../MAIN/FetchJobListings.php?search=${search}&location=${location}`)
+            fetch(`../MAIN/FetchJobListings.php`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("loading").style.display = "none"; // Hide loading message

@@ -15,12 +15,12 @@ if (isset($_GET['job_posting_id']) && is_numeric($_GET['job_posting_id'])) {
     $query = "
         SELECT 
             a.application_id,
-            jp.job_title AS job_title,           -- Added
+            jp.job_title AS job_title,           
             js.full_name AS job_seeker_name,
-            js.availability,                -- Added
-            js.location,                    -- Added
-            js.resume,                      -- Added
-            js.phone_number,                -- Added
+            js.availability,                
+            js.location,                    
+            js.resume,                      
+            js.phone_number,                
             a.application_date,
             a.status
         FROM applications a
