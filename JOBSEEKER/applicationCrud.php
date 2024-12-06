@@ -4,6 +4,7 @@ class JobApplication {
     private $conn;
     private $table = 'applications';
 
+    public $application_id;
     public $job_posting_id;
     public $job_seeker_id;
     public $application_date;
@@ -14,6 +15,27 @@ class JobApplication {
         $this->conn = $db;
     }
 
+    // Method to update the status of an application
+    public function updateApplicationStatus() {
+        $query = "UPDATE " . $this->table . " 
+                  SET status = :status 
+                  WHERE application_id = :application_id";
+
+        $stmt = $this->conn->prepare($query);
+
+        // Bind parameters
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':application_id', $this->application_id);
+
+        // Execute the query
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        // Log the error if execution fails
+        error_log("Error: " . implode(", ", $stmt->errorInfo()));
+        return false;
+    }
     // Method to create a new job application
     public function create() {
         $query = "INSERT INTO " . $this->table . " (job_posting_id, job_seeker_id, application_date, status)
@@ -99,7 +121,7 @@ class ApplicationManager {
             WHERE js.user_id = :user_id
             ORDER BY a.application_date DESC
         ";
-
+        
         try {
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
@@ -109,6 +131,38 @@ class ApplicationManager {
             throw new Exception("Error fetching applications: " . $e->getMessage());
         }
     }
+
+    // Method to get applicants by job posting ID
+    public function getApplicantsByJobPosting($jobPostingId) {
+        $query = "
+            SELECT 
+                a.application_id,
+                jp.job_title AS job_title,
+                js.full_name AS job_seeker_name,
+                js.availability,
+                js.location,
+                js.resume,
+                js.phone_number,
+                a.application_date,
+                a.status
+            FROM applications a
+            JOIN job_seekers js ON a.job_seeker_id = js.job_seeker_id
+            JOIN job_postings jp ON a.job_posting_id = jp.job_posting_id
+            WHERE a.job_posting_id = :job_posting_id
+        ";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':job_posting_id', $jobPostingId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Database Error: ' . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+    
 }
+
 
 ?>
