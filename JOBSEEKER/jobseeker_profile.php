@@ -82,132 +82,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Job Seeker Profile</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #35424a;
-            --secondary-color: #2c3e50;
-        }
-        body {
-            background-color: #f8f9fa;
-        }
-        .navbar {
-            background-color: var(--primary-color) !important;
-        }
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        .btn-primary:hover, .btn-primary:focus {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-        .form-control:focus, .form-select:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 0.25rem rgba(53, 66, 74, 0.25);
-        }
-    </style>
+    <title>JOB SEEKER DASHBOARD</title>
+    <link rel="stylesheet" href="../CSS/jobseeker_profile.css">
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">Job Seeker Dashboard</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="../JOBSEEKER/jobseeker_dashboard.php">Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="../JOBSEEKER/jobseeker_profile.php">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../JOBSEEKER/jobseeker_viewjob.php">View Jobs</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../JOBSEEKER/jobseeker_my_applications.php">View Application</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../LOGIN/logout.php">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
+        <h1>JOB SEEKER DASHBOARD</h1>
+        <nav>
+            <ul>
+                <li><a href="../JOBSEEKER/jobseeker_dashboard.php">Dashboard</a></li>
+                <li><a href="../JOBSEEKER/jobseeker_profile.php">Profile</a></li>
+                <li><a href="../JOBSEEKER/jobseeker_viewjob.php">View Jobs</a></li>
+                <li><a href="../JOBSEEKER/jobseeker_my_applications.php">View Application</a></li>
+                <li><a href="../LOGIN/logout.php">Logout</a></li>
+            </ul>
         </nav>
     </header>
+    <h2>Edit Your Profile</h2>
+    <form action="edit_profile.php" method="POST" enctype="multipart/form-data">
+        <label for="full_name">Full Name:</label>
+        <input type="text" name="full_name" value="<?php echo htmlspecialchars($jobSeekerData['full_name']); ?>" required><br>
 
-    <main class="container mt-4">
-        <h2 class="mb-4 text-center" style="color: var(--primary-color);">Edit Your Profile</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <form action="edit_profile.php" method="POST" enctype="multipart/form-data" class="needs-validation bg-white p-4 rounded shadow" novalidate>
-                    <div class="mb-3">
-                        <label for="full_name" class="form-label">Full Name:</label>
-                        <input type="text" class="form-control" id="full_name" name="full_name" value="<?php echo htmlspecialchars($jobSeekerData['full_name']); ?>" required>
-                        <div class="invalid-feedback">Please enter your full name.</div>
-                    </div>
+        <label for="availability">Availability:</label>
+        <select name="availability">
+            <option value="full-time" <?php echo ($jobSeekerData['availability'] == 'full-time') ? 'selected' : ''; ?>>Full-Time</option>
+            <option value="part-time" <?php echo ($jobSeekerData['availability'] == 'part-time') ? 'selected' : ''; ?>>Part-Time</option>
+            <option value="freelance" <?php echo ($jobSeekerData['availability'] == 'freelance') ? 'selected' : ''; ?>>Freelance</option>
+        </select><br>
 
-                    <div class="mb-3">
-                        <label for="availability" class="form-label">Availability:</label>
-                        <select class="form-select" id="availability" name="availability" required>
-                            <option value="full-time" <?php echo ($jobSeekerData['availability'] == 'full-time') ? 'selected' : ''; ?>>Full-Time</option>
-                            <option value="part-time" <?php echo ($jobSeekerData['availability'] == 'part-time') ? 'selected' : ''; ?>>Part-Time</option>
-                            <option value="freelance" <?php echo ($jobSeekerData['availability'] == 'freelance') ? 'selected' : ''; ?>>Freelance</option>
-                        </select>
-                        <div class="invalid-feedback">Please select your availability.</div>
-                    </div>
+        <label for="location">Address:</label>
+        <input type="text" name="location" value="<?php echo htmlspecialchars($jobSeekerData['location']); ?>" required><br>
 
-                    <div class="mb-3">
-                        <label for="location" class="form-label">Address:</label>
-                        <input type="text" class="form-control" id="location" name="location" value="<?php echo htmlspecialchars($jobSeekerData['location']); ?>" required>
-                        <div class="invalid-feedback">Please enter your address.</div>
-                    </div>
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" name="phone_number" value="<?php echo htmlspecialchars($jobSeekerData['phone_number']); ?>" required><br>
 
-                    <div class="mb-3">
-                        <label for="phone_number" class="form-label">Phone Number:</label>
-                        <input type="tel" class="form-control" id="phone_number" name="phone_number" value="<?php echo htmlspecialchars($jobSeekerData['phone_number']); ?>" required>
-                        <div class="invalid-feedback">Please enter your phone number.</div>
-                    </div>
+        <label for="resume">Resume (PDF, DOC, DOCX):</label>
+        <input type="file" name="resume"><br>
 
-                    <div class="mb-3">
-                        <label for="resume" class="form-label">Resume (PDF, DOC, DOCX):</label>
-                        <input type="file" class="form-control" id="resume" name="resume" accept=".pdf,.doc,.docx">
-                        <div class="invalid-feedback">Please upload a valid resume file.</div>
-                    </div>
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" name="profile_picture"><br>
 
-                    <div class="mb-3">
-                        <label for="profile_picture_url" class="form-label">Profile Picture:</label>
-                        <input type="file" class="form-control" id="profile_picture_url" name="profile_picture_url" accept="image/*">
-                        <div class="invalid-feedback">Please upload a valid image file.</div>
-                    </div>
-
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
-
-    <!-- Bootstrap 5 JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Form validation script -->
-    <script>
-    (function () {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-    </script>
+        <button type="submit">Save Changes</button>
+    </form>
 </body>
 </html>

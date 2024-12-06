@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../DATABASE/dbConnection.php';
-require_once '../JOBSEEKER/jobseekerCrud.php';
+require_once '../JOBSEEKER/jobSeekerCrud.php';
 
 // Get the database connection
 $database = new Database();
@@ -63,6 +63,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             echo "Invalid file type for resume.";
+            exit;
+        }
+    }
+
+    // Handle profile picture upload
+    $jobSeeker->profile_picture = $jobSeekerData['profile_picture']; // Default to current profile picture if not updated
+    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === 0) {
+        $picture_tmp = $_FILES['profile_picture']['tmp_name'];
+        $picture_name = $_FILES['profile_picture']['name'];
+        $picture_extension = strtolower(pathinfo($picture_name, PATHINFO_EXTENSION));
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (in_array($picture_extension, $allowed_extensions)) {
+            $picture_new_name = uniqid('', true) . '.' . $picture_extension;
+            $picture_dir = '../uploads/profile_pictures/';
+
+            if (!file_exists($picture_dir)) {
+                mkdir($picture_dir, 0777, true);
+            }
+
+            if (move_uploaded_file($picture_tmp, $picture_dir . $picture_new_name)) {
+                $jobSeeker->profile_picture = $picture_dir . $picture_new_name;
+            } else {
+                echo "Error uploading profile picture.";
+                exit;
+            }
+        } else {
+            echo "Invalid file type for profile picture.";
             exit;
         }
     }

@@ -36,12 +36,12 @@ if (!$jobSeekerData) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Seeker Dashboard</title>
- 
+    <title>JOB SEEKER DASHBOARD</title>
+    <link rel="stylesheet" href="../CSS/jobseeker_dashoard.css">
 </head>
 <body>
     <header>
-        <h1>Job Seeker Dashboard</h1>
+        <h1>JOB SEEKER DASHBOARD</h1>
         <nav>
             <ul>
                 <li><a href="../JOBSEEKER/jobseeker_dashboard.php">Dashboard</a></li>
