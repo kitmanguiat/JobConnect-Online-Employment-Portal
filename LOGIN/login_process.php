@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once '../DATABASE/dbConnection.php';
 require_once '../SIGNUP/crudUsers.php';
 
@@ -15,13 +17,13 @@ $email = htmlspecialchars(trim($_POST['email']));
 $password = htmlspecialchars(trim($_POST['password']));
 
 // Fetch all users
-$stmt = $user->read();
-$num = $stmt->rowCount();
+$stmtUsers = $user->read(); // Changed variable name to avoid conflicts
+$num = $stmtUsers->rowCount();
 
 if ($num > 0) {
     $isAuthenticated = false; // Flag for authentication success
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $stmtUsers->fetch(PDO::FETCH_ASSOC)) {
         // Verify email and password
         if ($email === $row['email'] && password_verify($password, $row['password'])) {
             $isAuthenticated = true; // Mark as authenticated
@@ -32,44 +34,52 @@ if ($num > 0) {
             $_SESSION['email'] = $row['email'];
             $_SESSION['role'] = $row['role'];
 
+            // Log session variables for debugging
+            file_put_contents('debug_log.txt', "User authenticated: " . print_r($_SESSION, true), FILE_APPEND);
+
             // Check if the user is a job-seeker or employer
             if ($row['role'] === "job-seeker") {
                 // Check if job-seeker profile exists
-                $jobSeekerCheckQuery = "SELECT job_seeker_id FROM job_seekers WHERE user_id = :user_id";
-                $stmt = $db->prepare($jobSeekerCheckQuery);
-                $stmt->bindParam(':user_id', $row['user_id']);
-                $stmt->execute();
+                $jobSeekerQuery = "SELECT job_seeker_id FROM job_seekers WHERE user_id = :user_id";
+                $stmtJobSeeker = $db->prepare($jobSeekerQuery); // Changed variable name
+                $stmtJobSeeker->bindParam(':user_id', $row['user_id']);
+                $stmtJobSeeker->execute();
 
-                if ($stmt->rowCount() > 0) {
+                if ($stmtJobSeeker->rowCount() > 0) {
                     // Job-seeker profile exists, redirect to dashboard
-                    $_SESSION['job_seeker_id'] = $stmt->fetch(PDO::FETCH_ASSOC)['job_seeker_id'];
+                    $_SESSION['job_seeker_id'] = $stmtJobSeeker->fetch(PDO::FETCH_ASSOC)['job_seeker_id'];
                     header('Location: ../JOBSEEKER/jobseeker_dashboard.php');
+                    exit;
                 } else {
                     // Job-seeker not registered, proceed with registration
+                    file_put_contents('debug_log.txt', "Redirecting to job-seeker registration.\n", FILE_APPEND);
                     header('Location: ../JOBSEEKER/jobseeker_registration.php');
+                    exit;
                 }
             } elseif ($row['role'] === "employer") {
                 // Check if employer profile exists
-                $employerCheckQuery = "SELECT employer_id FROM employers WHERE user_id = :user_id";
-                $stmt = $db->prepare($employerCheckQuery);
-                $stmt->bindParam(':user_id', $row['user_id']);
-                $stmt->execute();
+                $employerQuery = "SELECT employer_id FROM employers WHERE user_id = :user_id";
+                $stmtEmployer = $db->prepare($employerQuery); // Changed variable name
+                $stmtEmployer->bindParam(':user_id', $row['user_id']);
+                $stmtEmployer->execute();
 
-                if ($stmt->rowCount() > 0) {
+                if ($stmtEmployer->rowCount() > 0) {
                     // Employer profile exists, redirect to dashboard
-                    $_SESSION['employer_id'] = $stmt->fetch(PDO::FETCH_ASSOC)['employer_id'];
+                    $_SESSION['employer_id'] = $stmtEmployer->fetch(PDO::FETCH_ASSOC)['employer_id'];
                     header('Location: ../EMPLOYER/employer_dashboard.php');
+                    exit;
                 } else {
                     // Employer not registered, proceed with registration
+                    file_put_contents('debug_log.txt', "Redirecting to employer registration.\n", FILE_APPEND);
                     header('Location: ../EMPLOYER/employer_registration.php');
+                    exit;
                 }
             }
-            exit; // Stop further script execution after redirection
         }
     }
 
-    // If no authentication occurred, show error
     if (!$isAuthenticated) {
+        file_put_contents('debug_log.txt', "Invalid credentials for: $email\n", FILE_APPEND);
         echo "
         <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
         <script>
@@ -81,9 +91,10 @@ if ($num > 0) {
                 window.location.href = '../LOGIN/login.php';
             });
         </script>";
-        exit; // Ensure script halts after error is displayed
+        exit; // Halt further script execution
     }
 } else {
+    file_put_contents('debug_log.txt', "No users found in the system.\n", FILE_APPEND);
     echo "
     <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
     <script>
@@ -95,6 +106,6 @@ if ($num > 0) {
             window.location.href = '../LOGIN/login.php';
         });
     </script>";
-    exit; // Ensure script halts after error is displayed
+    exit; // Halt further script execution
 }
 ?>
