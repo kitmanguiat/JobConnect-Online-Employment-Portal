@@ -47,6 +47,6 @@
         </div>
     </footer>
 
-    <script src="../JS/login.js"></script>
+    <script src="../JS/main_login.js"></script>
 </body>
 </html>
