@@ -20,7 +20,6 @@ class JobSeeker {
     public function create() {
         $query = "INSERT INTO " . $this->table . " (user_id, full_name, availability, location, phone_number, resume, profile_picture)
                   VALUES (:user_id, :full_name, :availability, :location, :phone_number, :resume, :profile_picture)";
-
         $stmt = $this->conn->prepare($query);
 
         // Bind parameters
@@ -36,7 +35,6 @@ class JobSeeker {
         if ($stmt->execute()) {
             return true;
         }
-
         return false;
     }
 
@@ -64,6 +62,16 @@ class JobSeeker {
         }
 
         return false;
+    }
+
+    // Method to fetch job seeker data by user ID
+    public function getByUserId($user_id) {
+        $query = "SELECT * FROM " . $this->table . " WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 ?>

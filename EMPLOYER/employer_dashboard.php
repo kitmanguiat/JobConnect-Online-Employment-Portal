@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../DATABASE/dbConnection.php';
+require_once 'employerCrud.php';
 
 // Check if the user is logged in and is an employer
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'employer') {
@@ -15,19 +16,15 @@ $user_id = $_SESSION['user_id'];
 $database = new Database();
 $db = $database->getConnect();
 
+// Create Employer object
+$employer = new Employer($db);
+$employer->user_id = $user_id;
+
 // Fetch employer details
-$employerQuery = "SELECT * FROM employers WHERE user_id = :user_id";
-$employerStmt = $db->prepare($employerQuery);
-$employerStmt->bindParam(':user_id', $user_id);
-$employerStmt->execute();
-$employer = $employerStmt->fetch(PDO::FETCH_ASSOC);
+$employerDetails = $employer->getEmployerByUserId();
 
 // Fetch job postings for this employer
-$jobQuery = "SELECT * FROM job_postings WHERE employer_id = :employer_id";
-$jobStmt = $db->prepare($jobQuery);
-$jobStmt->bindParam(':employer_id', $employer['employer_id']);
-$jobStmt->execute();
-$jobPostings = $jobStmt->fetchAll(PDO::FETCH_ASSOC);
+$jobPostings = $employer->getJobPostings();
 
 ?>
 <!DOCTYPE html>
@@ -56,22 +53,22 @@ $jobPostings = $jobStmt->fetchAll(PDO::FETCH_ASSOC);
         <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
         <section class="profile">
             <h3>Company Profile</h3>
-            <?php if ($employer): ?>
+            <?php if ($employerDetails): ?>
                 <div class="company-profile">
                     <!-- Displaying company logo if available -->
-                    <?php if (!empty($employer['logo'])): ?>
-                        <img src="../uploads/<?php echo htmlspecialchars($employer['logo']); ?>" alt="Company Logo" class="company-logo">
+                    <?php if (!empty($employerDetails['logo'])): ?>
+                        <img src="../uploads/<?php echo htmlspecialchars($employerDetails['logo']); ?>" alt="Company Logo" class="company-logo">
                     <?php else: ?>
                         <p>No logo available</p>
                     <?php endif; ?>
 
-                    <p><strong>Company Name:</strong> <?php echo htmlspecialchars($employer['company_name']); ?></p>
-                    <p><strong>Industry:</strong> <?php echo htmlspecialchars($employer['industry']); ?></p>
-                    <p><strong>Location:</strong> <?php echo htmlspecialchars($employer['location']); ?></p>
-                    <p><strong>Company Size:</strong> <?php echo htmlspecialchars($employer['company_size']); ?></p>
-                    <p><strong>Contact Number:</strong> <?php echo htmlspecialchars($employer['contact_number']); ?></p>
-                    <p><strong>Company Description:</strong> <?php echo htmlspecialchars($employer['company_description']); ?></p>
-                    <p><strong>Founded Year:</strong> <?php echo htmlspecialchars($employer['founded_year']); ?></p>
+                    <p><strong>Company Name:</strong> <?php echo htmlspecialchars($employerDetails['company_name']); ?></p>
+                    <p><strong>Industry:</strong> <?php echo htmlspecialchars($employerDetails['industry']); ?></p>
+                    <p><strong>Location:</strong> <?php echo htmlspecialchars($employerDetails['location']); ?></p>
+                    <p><strong>Company Size:</strong> <?php echo htmlspecialchars($employerDetails['company_size']); ?></p>
+                    <p><strong>Contact Number:</strong> <?php echo htmlspecialchars($employerDetails['contact_number']); ?></p>
+                    <p><strong>Company Description:</strong> <?php echo htmlspecialchars($employerDetails['company_description']); ?></p>
+                    <p><strong>Founded Year:</strong> <?php echo htmlspecialchars($employerDetails['founded_year']); ?></p>
                 </div>
             <?php else: ?>
                 <p>No employer profile found. Please complete your profile.</p>
