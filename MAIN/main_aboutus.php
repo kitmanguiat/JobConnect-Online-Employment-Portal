@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - JobConnect</title>
-    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="stylesheet" href="../CSS/main_aboutus.css">
     
 </head>
 <body>
@@ -17,7 +17,6 @@
                         <li><a href="../MAIN/index.php">Home</a></li>
                         <li><a href="../MAIN/main_joblisting.php">Job Listings</a></li>
                         <li class="current"></li><a href="../MAIN/main_aboutus.php">About Us</a></li>
-                        <li><a href="../MAIN/main_contact.php">Contact</a></li>
                         <li><a href="../LOGIN/login.php">Login</a></li>
                         <li><a href="../SIGNUP/signup.php">Register</a></li>
                     </ul>

@@ -1,0 +1,197 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f0f2f5;
+}
+
+/* Container for Layout */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styling */
+header {
+    background: linear-gradient(to right, #35424a, #2c3e50);
+    color: #ffffff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #e8491d;
+}
+
+/* Main Section Styling */
+main {
+    margin: 30px 0;
+    padding: 20px;
+}
+
+/* Profile Section */
+.profile {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.profile h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #35424a;
+}
+
+.company-logo {
+    max-width: 150px;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    height: 100px;
+}
+
+/* Styling for Select Dropdown */
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #333;
+    appearance: none; /* Removes default arrow for better customization */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    position: relative;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"%3E%3Cpath d="M0 0l5 6 5-6H0z" fill="%23999"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+
+.form-group select:hover {
+    border-color: #35424a;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: #2c3e50;
+    box-shadow: 0 0 3px rgba(50, 50, 50, 0.3);
+}
+
+.btn {
+    background-color: #35424a;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2c3e50;
+}
+
+/* Footer Styling */
+footer {
+    background: #35424a;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile {
+        margin: 20px 0;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 0.9rem;
+    }
+}

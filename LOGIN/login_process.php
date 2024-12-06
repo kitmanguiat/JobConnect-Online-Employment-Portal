@@ -68,6 +68,7 @@ if ($num > 0) {
         }
     }
 
+    // If no authentication occurred, show error
     if (!$isAuthenticated) {
         echo "
         <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
@@ -77,9 +78,10 @@ if ($num > 0) {
                 text: 'Invalid email or password.',
                 icon: 'error'
             }).then(() => {
-                window.location.href = '../HTML/main_login.html';
+                window.location.href = '../LOGIN/login.php';
             });
         </script>";
+        exit; // Ensure script halts after error is displayed
     }
 } else {
     echo "
@@ -90,8 +92,9 @@ if ($num > 0) {
             text: 'No users found in the system.',
             icon: 'error'
         }).then(() => {
-            window.location.href = '../HTML/main_login.html';
+            window.location.href = '../LOGIN/login.php';
         });
     </script>";
+    exit; // Ensure script halts after error is displayed
 }
 ?>

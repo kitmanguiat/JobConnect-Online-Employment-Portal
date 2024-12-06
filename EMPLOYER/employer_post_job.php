@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post a Job</title>
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/employer_post_job.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <style>
-        /* Basic modal styling */
         #editJobModal {
             position: fixed;
             top: 50%;
@@ -40,6 +39,7 @@
 </head>
 <body>
     <header>
+        <h1>JobConnect</h1>
         <nav class="section-navbar">
             <ul>
                 <li><a href="../EMPLOYER/employer_dashboard.php">Dashboard</a></li>
@@ -57,7 +57,7 @@
             <input type="text" name="job_title" id="job_title" required> <br><br>
             <label for="description">Job Description:</label>
             <textarea name="description" id="description" required></textarea> <br><br>
-            <label for="requirements">Job Requirement:</label>
+            <label for="requirements">Job Requirements:</label>
             <textarea name="requirements" id="requirements" required></textarea> <br><br>
             <label for="location">Location:</label>
             <input type="text" name="location" id="location" required> <br><br>
@@ -77,7 +77,7 @@
             <tr>
                 <th>Job Title</th>
                 <th>Description</th>
-                <th>Requirement</th>
+                <th>Requirements</th>
                 <th>Location</th>
                 <th>Salary</th>
                 <th>Status</th>
@@ -96,7 +96,7 @@
             <input type="text" name="job_title" id="edit_job_title" required>
             <label for="edit_job_description">Job Description:</label>
             <textarea name="description" id="edit_job_description" required></textarea>
-            <label for="edit_job_requirement">Job Requirement:</label>
+            <label for="edit_job_requirement">Job Requirements:</label>
             <textarea name="requirements" id="edit_job_requirement" required></textarea>
             <label for="edit_location">Location:</label>
             <input type="text" name="location" id="edit_location" required>
@@ -126,60 +126,55 @@
                 ]
             });
 
-            function fetchJobs() {
+            const fetchJobs = () => {
                 $.ajax({
                     url: '../EMPLOYER/fetch_job.php',
                     method: 'GET',
-                    success: function (data) {
+                    success: (data) => {
                         jobTable.clear().rows.add(JSON.parse(data)).draw();
                     },
-                    error: function (xhr) {
-                        Swal.fire('Error', `Failed to fetch jobs. ${xhr.responseText}`, 'error');
-                    }
+                    error: (xhr) => Swal.fire('Error', `Failed to fetch jobs: ${xhr.responseText}`, 'error')
                 });
-            }
+            };
+
             fetchJobs();
 
             $('#jobForm').on('submit', function (e) {
-    e.preventDefault();
-    const formData = $(this).serialize();
+                e.preventDefault();
+                const formData = $(this).serialize();
 
-    $.ajax({
-        url: '../EMPLOYER/create_job.php',
-        method: 'POST',
-        data: formData,
-        success: function (response) {
-            Swal.fire('Success', response.message, 'success');
-            fetchJobs();
-            $('#jobForm')[0].reset(); // Reset the form
-        },
-        error: function (xhr) {
-            Swal.fire('Error', `Failed to create job. ${xhr.responseText}`, 'error');
-        }
-    });
-});
+                $.ajax({
+                    url: '../EMPLOYER/create_job.php',
+                    method: 'POST',
+                    data: formData,
+                    success: (response) => {
+                        Swal.fire('Success', response.message, 'success');
+                        fetchJobs();
+                        $('#jobForm')[0].reset();
+                    },
+                    error: (xhr) => Swal.fire('Error', `Failed to post job: ${xhr.responseText}`, 'error')
+                });
+            });
 
             $('#jobTable').on('click', '.delete-btn', function () {
                 const jobId = $(this).data('id');
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'This action cannot be undone!',
+                    title: 'Confirm Deletion',
+                    text: 'Are you sure you want to delete this job?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
+                    confirmButtonText: 'Delete'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
                             url: '../EMPLOYER/delete_job.php',
                             method: 'POST',
                             data: { job_posting_id: jobId },
-                            success: function (response) {
-                                Swal.fire('Success', response, 'success');
+                            success: (response) => {
+                                Swal.fire('Deleted', response, 'success');
                                 fetchJobs();
                             },
-                            error: function (xhr) {
-                                Swal.fire('Error', `Failed to delete job. ${xhr.responseText}`, 'error');
-                            }
+                            error: (xhr) => Swal.fire('Error', `Deletion failed: ${xhr.responseText}`, 'error')
                         });
                     }
                 });
@@ -191,20 +186,18 @@
                     url: '../EMPLOYER/get_job.php',
                     method: 'GET',
                     data: { job_posting_id: jobId },
-                    success: function (response) {
+                    success: (response) => {
                         const job = JSON.parse(response);
                         $('#edit_job_posting_id').val(job.job_posting_id);
                         $('#edit_job_title').val(job.job_title);
                         $('#edit_job_description').val(job.description);
-                        $('#edit_job_requirement').val(job.requirement);
+                        $('#edit_job_requirement').val(job.requirements);
                         $('#edit_location').val(job.location);
                         $('#edit_salary').val(job.salary);
                         $('#edit_status').val(job.status);
                         $('#editJobModal').show();
                     },
-                    error: function (xhr) {
-                        Swal.fire('Error', `Failed to fetch job details. ${xhr.responseText}`, 'error');
-                    }
+                    error: (xhr) => Swal.fire('Error', `Unable to fetch job: ${xhr.responseText}`, 'error')
                 });
             });
 
@@ -215,14 +208,12 @@
                     url: '../EMPLOYER/edit_job.php',
                     method: 'POST',
                     data: formData,
-                    success: function (response) {
-                        Swal.fire('Success', response, 'success');
+                    success: (response) => {
+                        Swal.fire('Updated', response, 'success');
                         fetchJobs();
                         $('#editJobModal').hide();
                     },
-                    error: function (xhr) {
-                        Swal.fire('Error', `Failed to edit job. ${xhr.responseText}`, 'error');
-                    }
+                    error: (xhr) => Swal.fire('Error', `Update failed: ${xhr.responseText}`, 'error')
                 });
             });
 

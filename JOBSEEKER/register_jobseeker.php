@@ -85,7 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Call create method to register job seeker
     if ($jobSeeker->create()) {
-        echo "Job seeker registered successfully!";
+        // Redirect to landing page on successful registration
+        header("Location: ../JOBSEEKER/jobseeker_dashboard.php");
+        exit;
     } else {
         echo "Failed to register job seeker.";
     }

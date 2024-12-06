@@ -1,0 +1,138 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f0f2f5;
+}
+
+/* Header Styling */
+header {
+    background: linear-gradient(to right, #35424a, #2c3e50);
+    color: #ffffff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #e8491d;
+}
+
+/* Main Content Styling */
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #35424a;
+    text-align: center;
+}
+
+/* Table Styling */
+#applicationsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#applicationsTable th,
+#applicationsTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: #000; /* Set table text color to black */
+}
+
+#applicationsTable th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+#applicationsTable tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Status Styling */
+.status {
+    font-weight: bold;
+}
+
+.status.accepted {
+    color: #28a745;
+}
+
+.status.rejected {
+    color: #dc3545;
+}
+
+.status.pending {
+    color: #ffc107;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    #applicationsTable th, 
+    #applicationsTable td {
+        padding: 8px;
+    }
+    
+    #applicationsTable {
+        font-size: 0.9rem;
+    }
+}

@@ -50,8 +50,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="profile_picture_url" class="form-label">Profile Picture:</label>
-                <input type="file" class="form-control" id="profile_picture_url" name="profile_picture_url" accept="image/*">
+                <label for="profile_picture" class="form-label">Profile Picture:</label>
+                <input type="file" class="form-control" id="profile_picture" name="profile_picture" accept="image/*">
             </div>
 
             <button type="submit" class="btn btn-primary">Register</button>

@@ -6,7 +6,7 @@
     <title>JobConnect - Your Gateway to Career Opportunities</title>
     <!-- Include DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="stylesheet" href="../CSS/main_joblisting.css">
 </head>
 <body>
     <header>
@@ -18,7 +18,6 @@
                         <li><a href="../MAIN/index.php">Home</a></li>
                         <li class="current"><a href="../MAIN/main_joblisting.php">Job Listings</a></li>
                         <li><a href="../MAIN/main_aboutus.php">About Us</a></li>
-                        <li><a href="../MAIN/main_contact.php">Contact</a></li>
                         <li><a href="../LOGIN/login.php">Login</a></li>
                         <li><a href="../SIGNUP/signup.php">Register</a></li>
                     </ul>
