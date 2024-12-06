@@ -6,6 +6,7 @@
     <title>Job Seeker Registration</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../JS/jobseeker_registration.js"></script>
 </head>
 <body>
     <div class="container mt-5">

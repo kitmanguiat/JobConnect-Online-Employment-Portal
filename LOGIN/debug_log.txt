@@ -59,3 +59,25 @@ User authenticated: Array
     [email] => mkitmichail@gmail.com
     [role] => employer
 )
+User authenticated: Array
+(
+    [user_id] => 14
+    [username] => shane
+    [email] => shanemalupiton@gmail.com
+    [role] => job-seeker
+)
+Redirecting to job-seeker registration.
+User authenticated: Array
+(
+    [user_id] => 14
+    [username] => shane
+    [email] => shanemalupiton@gmail.com
+    [role] => job-seeker
+)
+User authenticated: Array
+(
+    [user_id] => 11
+    [username] => Michail
+    [email] => mkitmichail@gmail.com
+    [role] => employer
+)
