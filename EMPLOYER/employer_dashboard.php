@@ -101,7 +101,7 @@ $jobPostings = $employer->getJobPostings();
                     </tbody>
                 </table>
             <?php else: ?>
-                <p>No job postings found. <a href="../PHP/employer_post_job.php">Post your first job</a>!</p>
+                <p>No job postings found. <a href="../EMPLOYER/employer_post_job.php">Post your first job</a>!</p>
             <?php endif; ?>
         </section>
     </main>

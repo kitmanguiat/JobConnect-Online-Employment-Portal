@@ -18,11 +18,7 @@ $jobSeeker = new JobSeeker($db);
 
 // Fetch job seeker details from the database
 $user_id = $_SESSION['user_id'];
-$query = "SELECT * FROM job_seekers WHERE user_id = :user_id";
-$stmt = $db->prepare($query);
-$stmt->bindParam(':user_id', $user_id);
-$stmt->execute();
-$jobSeekerData = $stmt->fetch(PDO::FETCH_ASSOC);
+$jobSeekerData = $jobSeeker->getByUserId($user_id);
 
 // Check if user data is found
 if (!$jobSeekerData) {

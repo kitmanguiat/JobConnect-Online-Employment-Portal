@@ -1,20 +1,27 @@
 <?php
 require_once '../DATABASE/dbConnection.php';
+require_once '../JOBSEEKER/applicationCrud.php';
 
 $database = new Database();
 $db = $database->getConnect();
 
-$applicationId = htmlspecialchars($_POST['application_id']);
-$status = htmlspecialchars($_POST['status']);
+// Ensure required POST fields are set
+if (isset($_POST['application_id'], $_POST['status'])) {
+    $applicationId = htmlspecialchars($_POST['application_id']);
+    $status = htmlspecialchars($_POST['status']);
 
-$query = "UPDATE applications SET status = :status WHERE application_id = :application_id";
+    $jobApplication = new JobApplication($db);
+    $jobApplication->application_id = $applicationId;
+    $jobApplication->status = $status;
 
-$stmt = $db->prepare($query);
-$stmt->bindParam(':status', $status);
-$stmt->bindParam(':application_id', $applicationId);
-
-if ($stmt->execute()) {
-    echo "success";
+    // Update the application status
+    if ($jobApplication->updateApplicationStatus()) {
+        echo "success";
+    } else {
+        echo "error";
+    }
 } else {
-    echo "error";
+    echo "error: Missing required fields";
 }
+
+?>
