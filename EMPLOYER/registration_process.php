@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 text: 'User not logged in. Please log in and try again.',
                 icon: 'error'
             }).then(() => {
-                window.location.href = '../login.php'; // Redirect to login
+                window.location.href = '../LOGIN/login.php'; // Redirect to login
             });
         </script>";
         exit;
