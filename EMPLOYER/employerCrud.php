@@ -18,6 +18,15 @@ class Employer {
         $this->conn = $db;
     }
 
+     // Get employer details by user ID
+     public function getEmployerDetailsByUserId() {
+        $query = "SELECT * FROM " . self::tbl_name . " WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $this->user_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Fetch employer details
+    }
+
     // Get employer information by user ID
     public function getEmployerByUserId() {
         $query = "SELECT * FROM " . self::tbl_name . " WHERE user_id = :user_id";
